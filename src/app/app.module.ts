@@ -3,7 +3,7 @@ declare var globalLng: any;
 import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, Popover } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
@@ -31,8 +31,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { Facebook } from '@ionic-native/facebook';
 import { LocatonsProvider } from '../providers/locatons/locatons';
-
-import { PopoverComponent } from '../components/popover/popover';
+import { PopoverDenunciarComponent } from '../components/popover-denunciar/popover-denunciar';
+import { PopoverTopComponent } from '../components/popover-top/popover-top';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { PopoverComponent } from '../components/popover/popover';
     TabsPage,
     MapPage,
     RegisterPage,
-    PopoverComponent
+    PopoverDenunciarComponent,
+    PopoverTopComponent
   ],
   
   imports: [
@@ -68,7 +69,8 @@ import { PopoverComponent } from '../components/popover/popover';
     MapPage,
     RegisterPage,
     CommentsPage,
-    PopoverComponent
+    PopoverDenunciarComponent,
+    PopoverTopComponent
   ],
   providers: [
     StatusBar,

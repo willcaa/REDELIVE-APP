@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { PopoverController } from 'ionic-angular';
-import { PopoverComponent } from '../../components/popover/popover';
+import { PopoverDenunciarComponent } from '../../components/popover-denunciar/popover-denunciar';
 
 /**
  * Generated class for the PerfilPage page.
@@ -33,10 +33,14 @@ export class PerfilPage {
   }
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverComponent,{},{cssClass:"meu-popover"});
+    let popover = this.popoverCtrl.create(PopoverDenunciarComponent,{},{cssClass:"meu-popover"});
     popover.present({
       ev: myEvent
     });
+
+    popover.onDidDismiss(popoverData => {
+      console.log(popoverData);
+    })
   }
 
   carregarPerfil() {
