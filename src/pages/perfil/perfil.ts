@@ -3,6 +3,8 @@ import { Storage } from '@ionic/storage';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { PopoverController } from 'ionic-angular';
+import { PopoverComponent } from '../../components/popover/popover';
 
 /**
  * Generated class for the PerfilPage page.
@@ -27,7 +29,14 @@ export class PerfilPage {
   public perfil_imagem: any;
   public perfil_nome: any;
   public index_anuncio: any;
-  constructor(public navCtrl: NavController,private _sanitizer: DomSanitizer, public navParams: NavParams, public http: Http, private storage: Storage,) {
+  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private _sanitizer: DomSanitizer, public navParams: NavParams, public http: Http, private storage: Storage,) {
+  }
+
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverComponent,{},{cssClass:"meu-popover"});
+    popover.present({
+      ev: myEvent
+    });
   }
 
   carregarPerfil() {

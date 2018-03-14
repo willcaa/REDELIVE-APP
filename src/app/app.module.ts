@@ -32,6 +32,8 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { Facebook } from '@ionic-native/facebook';
 import { LocatonsProvider } from '../providers/locatons/locatons';
 
+import { PopoverComponent } from '../components/popover/popover';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -43,7 +45,8 @@ import { LocatonsProvider } from '../providers/locatons/locatons';
     HomePage,
     TabsPage,
     MapPage,
-    RegisterPage
+    RegisterPage,
+    PopoverComponent
   ],
   
   imports: [
@@ -64,7 +67,8 @@ import { LocatonsProvider } from '../providers/locatons/locatons';
     TabsPage,
     MapPage,
     RegisterPage,
-    CommentsPage
+    CommentsPage,
+    PopoverComponent
   ],
   providers: [
     StatusBar,

@@ -78,4 +78,15 @@ page-perfil {
     .fixed-content, .scroll-content, .card-md, .card-md .item-md{
         background-color: #fafafa;
     }
+    .botao-seguir {
+        position: absolute;
+        right: 5px;
+        top: 80px;
+        width: 125px;
+    }
+    .botao-denunciar {
+        position: absolute;
+        top: 110px;
+        right: 5px;
+    }
 }
