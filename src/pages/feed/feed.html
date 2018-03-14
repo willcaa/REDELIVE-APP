@@ -24,7 +24,7 @@
   <ion-toolbar class="buttons_header">
 
     <ion-segment style="color: #000" item-end>
-        <button *ngIf="btnTop" ion-button color="light" style="margin-left: -8px;box-shadow: none; color: blue;" (click)="alterarTopNews(topOrNews)">
+        <button *ngIf="btnTop" ion-button color="light" style="margin-left: -8px;box-shadow: none; color: blue;" (click)="alterarTopNews($event)">
             <ion-icon name="arrow-up"></ion-icon>
             {{topOrNews}}
           </button>

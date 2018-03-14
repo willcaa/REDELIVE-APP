@@ -1,9 +1,12 @@
 // http://ionicframework.com/docs/theming/
 
-.meu-popover .popover-content {
-    top: +144px!important;
+.popover-denuncia .popover-content {
+    top: 144px!important;
+    right: 7px!important;
 }
-
+.popover-top .popover-content {
+    top: 90px!important;
+}
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These

@@ -11,6 +11,8 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { Storage } from '@ionic/storage';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { AlertController } from 'ionic-angular';
+import { PopoverController } from 'ionic-angular';
+import { PopoverTopComponent } from '../../components/popover-top/popover-top';
 /**
  * Generated class for the FeedPage page.
  *
@@ -56,7 +58,7 @@ export class FeedPage {
   userId: any;
   userImagem: any;
   local: any;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
+  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
     this.http = http;
     this.start = "";
     this.destination = "";
@@ -65,34 +67,18 @@ export class FeedPage {
     }
   }
 
-  alterarTopNews(which) {
-    let alert = this.alertCtrl.create();
-
-    alert.addInput({
-      type: 'radio',
-      label: 'Top',
-      value: 'Top',
-      checked: which == 'Top'
+  alterarTopNews(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverTopComponent,{atual:this.topOrNews},{cssClass:"popover-top"});
+    popover.present({
+      ev: myEvent
     });
 
-    alert.addInput({
-      type: 'radio',
-      label: 'News',
-      value: 'News',
-      checked: which == 'News'
-    });
-
-    alert.addButton('Cancel');
-    alert.addButton({
-      text: 'OK',
-      handler: data => {
-        this.topOrNews = data;
-        this.index_feed = 0;
-        this.feed = [];
-        this.getUserPosition();
-      }
-    });
-    alert.present();
+    popover.onDidDismiss(popoverData => {
+      this.topOrNews = popoverData;
+      this.index_feed = 0;
+      this.feed = [];
+      this.getUserPosition();
+    })
   }
 
   alterarLocal(newLocal) {

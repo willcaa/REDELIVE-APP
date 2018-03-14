@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the PopoverTopComponent component.
@@ -12,11 +13,18 @@ import { Component } from '@angular/core';
 })
 export class PopoverTopComponent {
 
-  text: string;
+  public which: any;
 
-  constructor() {
-    console.log('Hello PopoverTopComponent Component');
-    this.text = 'Hello World';
+  constructor(public viewCtrl: ViewController, public navParams: NavParams) {
+    this.which = this.navParams.get("atual");
+  }
+
+  sair(opt) {
+    if(opt == 1) {
+      this.viewCtrl.dismiss("Top");
+    } else if(opt == 2) {
+      this.viewCtrl.dismiss("News");
+    }
   }
 
 }

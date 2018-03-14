@@ -33,7 +33,7 @@ export class PerfilPage {
   }
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverDenunciarComponent,{},{cssClass:"meu-popover"});
+    let popover = this.popoverCtrl.create(PopoverDenunciarComponent,{},{cssClass:"popover-denuncia"});
     popover.present({
       ev: myEvent
     });

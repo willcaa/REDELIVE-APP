@@ -1,8 +1,8 @@
 <ion-list>
-  <ion-item (click)="sair(1)">
+  <ion-item (click)="sair(1)" [ngStyle]="{'color': which == 'Top' ? 'blue' : 'black'}">
     Top
   </ion-item>
-  <ion-item (click)="sair(2)">
+  <ion-item (click)="sair(2)" [ngStyle]="{'color': which == 'News' ? 'blue' : 'black'}">
     News
   </ion-item>
 </ion-list>
