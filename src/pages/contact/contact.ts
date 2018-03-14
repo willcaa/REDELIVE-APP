@@ -10,5 +10,16 @@ export class ContactPage {
   constructor(public navCtrl: NavController) {
 
   }
+  openDetails() {
+    this.navCtrl.push('FilmDetailsPage');
+  }
+  pushPage() {
+    this.navCtrl.push('FeedPage');
+  }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad PostPage');
+    this.pushPage();
+  }
+  
 }

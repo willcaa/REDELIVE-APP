@@ -1,40 +1,86 @@
+declare var globalLat: any;
+declare var globalLng: any;
+import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { IonicStorageModule } from '@ionic/storage';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 import { AboutPage } from '../pages/about/about';
+import { CommentsPage } from '../pages/comments/comments';
+import { CheckinPage } from '../pages/checkin/checkin'
 import { ContactPage } from '../pages/contact/contact';
+import { PerfilPage } from '../pages/perfil/perfil';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { MapPage } from '../pages/map/map';
+import { RegisterPage } from '../pages/register/register';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FeedPageModule } from '../pages/feed/feed.module';
+import { Geolocation } from '@ionic-native/geolocation';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { Facebook } from '@ionic-native/facebook';
+import { LocatonsProvider } from '../providers/locatons/locatons';
 
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
+    CommentsPage,
+    CheckinPage,
     ContactPage,
+    PerfilPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    MapPage,
+    RegisterPage
   ],
+  
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    FeedPageModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AboutPage,
     ContactPage,
+    CheckinPage,
+    PerfilPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    MapPage,
+    RegisterPage,
+    CommentsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Geolocation,
+    GoogleMaps,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FileTransfer,
+    FileTransferObject,
+    File,
+    FilePath,
+    LaunchNavigator,
+    Camera,
+    Facebook,
+    PhotoViewer,
+    LocatonsProvider
   ]
 })
 export class AppModule {}

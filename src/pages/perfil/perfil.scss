@@ -1,0 +1,81 @@
+page-perfil {
+
+    .toolbar-md-dark .toolbar-background-md {
+        background: linear-gradient(to right, #73395c , #0a2386);
+    }
+
+    .scroll-content {
+        padding: 0px !important;
+        margin-top: 295px !important;
+    }
+
+    .fundo-perfil {
+        background-image: url("../assets/imgs/fundo_perfil.jpg");
+        background-size: cover;
+        padding: 5% 0px 0px 0px;
+    }
+
+    .imagem_fundo {
+        width: 120px;
+        height: 120px;
+        margin-left: calc(50% - 60px);
+        border-radius: 100%;
+        background-origin: initial!important;
+        background-size: cover!important;
+        background-position: center!important;
+    }
+
+    .nome_usuario {
+        text-align: center;
+        margin: 0px;
+        color: white;
+    }
+    
+    .buttons_header {
+        min-height: 0px;
+        height: 30px;
+    }
+
+    .toolbar .segment-md .segment-button.activated, .toolbar .segment-md .segment-button.segment-activated {
+        border-bottom: dotted 10px #488aff;
+        margin-bottom: 3px;
+        color: #488aff;
+    }
+
+    .segment-md .segment-button {
+        color: #000;
+    }
+
+    .border_subheader {
+        min-height: 0px;
+        height: 30px;
+        border-top: solid 3px #aaa;
+    }
+
+    .segment-button {
+        overflow: visible !important;
+    }
+
+    .ion-md-arrow-up {
+        font-weight: bolder;
+    }
+
+    .button-clear-md{
+        color: #777777 !important;
+    }
+    
+    .button-clear-md:focus {
+        color: #00a2ed !important;
+    }
+
+    .toolbar-md-light .toolbar-background-md{
+        background: #fff;
+    }
+
+    .text-input-md{
+        font-size: small;
+    }
+    .fixed-content, .scroll-content, .card-md, .card-md .item-md{
+        background-color: #fafafa;
+    }
+}

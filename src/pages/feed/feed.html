@@ -1,0 +1,136 @@
+<!--
+  Generated template for the FeedPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+
+  <ion-toolbar color="dark">  
+
+    <ion-title>
+      <img src="assets/imgs/logo.png" alt="" style="height: 40px;">
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goPerfil()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+
+  <ion-toolbar class="buttons_header">
+
+    <ion-segment style="color: #000" item-end>
+        <button *ngIf="btnTop" ion-button color="light" style="margin-left: -8px;box-shadow: none; color: blue;" (click)="alterarTopNews(topOrNews)">
+            <ion-icon name="arrow-up"></ion-icon>
+            {{topOrNews}}
+          </button>
+        <button *ngIf="btnNews" ion-button color="light" style="margin-left: -8px;box-shadow: none;">
+          <ion-icon name="arrow-up"></ion-icon>
+          Top
+        </button>
+      <ion-segment-button aria-pressed="true" id="btt" value="1">
+        <ion-icon name="contacts"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="3" (click)="alterarLocal('bairro')">
+        Bairro
+      </ion-segment-button>
+      <ion-segment-button value="4" (click)="alterarLocal('cidade')">
+        Cidade
+      </ion-segment-button>
+      <ion-segment-button value="5" (click)="alterarLocal('estado')">
+        Estado
+      </ion-segment-button>
+      <ion-segment-button value="6" (click)="alterarLocal('pais')">
+        País
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-item style="height: 20px; background: #f8f8f8; min-height: 0px;">
+      <ion-range min="0" max="500" step="100" snaps="false" color="primary" [(ngModel)]="QQCOISA"></ion-range>
+  </ion-item>
+  
+
+  <!-- <ion-toolbar class="border_subheader">
+    <ion-buttons item-start>
+      <button *ngIf="btnNews" ion-button style="margin-left: -8px;box-shadow: none; color: blue;">
+          News
+        </button>
+        <button *ngIf="btnTop" ion-button style="margin-left: -8px;box-shadow: none;">
+        News
+      </button>
+    </ion-buttons>
+  </ion-toolbar> -->
+
+  <ion-toolbar id="sendbar" color="light" style="height: 45px; min-height: 0px;">
+    <ion-item>
+        <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
+        <ion-avatar item-start>
+          <img src="{{ userImagem }}">
+        </ion-avatar>
+    </ion-item> 
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goImage()">
+              <ion-icon name="camera"></ion-icon>
+            </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button (click)="getUserPostPosition()" ion-button icon-only>
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content #contentRef (ionScroll)="scrollingFun($event)">
+  <ion-card *ngFor="let item of feed">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ item.user_image }}" (click)="goPerfil(item.id)">
+      </ion-avatar>
+      <h2>{{ item.nome }} <button *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)" class="botao_local">{{ item.local }}</button></h2>
+      <p>{{ item.data }}</p>
+    </ion-item>
+    <div style="max-height: 340px; overflow: hidden;">
+      <img *ngIf="item.imagem" (click)="ampliarImagem(item.imagem, item.texto)" src="{{ item.imagem }}">
+    </div>
+    <ion-card-content>
+      <p>{{ item.texto }}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <img>
+          <button (click)="top( item.id_anuncio, item.likes, item.status_top )" ion-button icon-left clear small>
+            <ion-icon id="arrow{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId" name="md-arrow-up"></ion-icon>
+            <div style="color: #00a2ed" id="top{{ item.id_anuncio }}" *ngIf="item.status_top || item.usuario == userId">Top {{ item.likes }}</div>
+            <div id="top{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId">Top {{ item.likes }}</div>
+          </button>
+      </ion-col>
+      <ion-col>
+        <button (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{ item.comments }}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+          <button ion-button icon-left clear small>
+          <ion-icon name="md-locate"></ion-icon>
+        <ion-badge (click)="navigate(item.lat, item.lng)" item-end >{{ item.distance }} {{ item.unit }}</ion-badge>
+      </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingText="Carregando...">    
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+

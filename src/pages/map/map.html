@@ -1,0 +1,78 @@
+<!--
+  Generated template for the MapPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="dark">  
+      
+          <ion-title>
+            <img src="assets/imgs/logo.png" alt="" style="height: 40px;">
+          </ion-title>
+      
+          <ion-buttons end>
+            <button ion-button icon-only>
+              <ion-icon name="person"></ion-icon>
+            </button>
+          </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color="light">
+      <ion-item>
+          <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
+        </ion-item> 
+          <ion-buttons end>
+              <button ion-button icon-only (click)="goImage()">
+                <ion-icon name="camera"></ion-icon>
+              </button>
+            </ion-buttons>
+          <ion-buttons end>
+              <button (click)="getUserPostPosition()" ion-button icon-only>
+                <ion-icon name="send"></ion-icon>
+                
+              </button>
+            </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="card-background-page">
+    <ion-item>
+        <ion-avatar item-start>
+          <img src="{{ userPic }}">
+        </ion-avatar>
+        <h2>{{ userData }}</h2>
+      </ion-item>
+  <div #map id="map"style="height: 50%;"></div>
+  <ion-row>
+      <ion-col>
+        <button (click)="top( id_anuncio )" ion-button icon-left clear small>
+          <ion-icon name="md-arrow-up"></ion-icon>
+          <div>Top</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>4</div>
+        </button>
+      </ion-col>
+      <ion-col>
+          <button ion-button icon-left clear small>
+          <ion-icon name="md-locate"></ion-icon>
+      </button>
+      </ion-col>
+    </ion-row>
+  <ion-item>
+      <h2>Recentes no local</h2>
+    </ion-item>
+  <ion-slides pager  style="height: 50%;">
+
+        <ion-slide *ngFor="let item of feed" style="height: 100px; max-width: 33.33333% !important; overflow: hidden;">
+          <ion-card>
+            <img src="{{ item.imagem }}">
+          </ion-card>
+        </ion-slide>
+        
+  </ion-slides>
+
+</ion-content>
