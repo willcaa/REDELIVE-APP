@@ -33,6 +33,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { LocatonsProvider } from '../providers/locatons/locatons';
 import { PopoverDenunciarComponent } from '../components/popover-denunciar/popover-denunciar';
 import { PopoverTopComponent } from '../components/popover-top/popover-top';
+import { PopoverOptsAnunciosComponent } from '../components/popover-opts-anuncios/popover-opts-anuncios';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PopoverTopComponent } from '../components/popover-top/popover-top';
     MapPage,
     RegisterPage,
     PopoverDenunciarComponent,
-    PopoverTopComponent
+    PopoverTopComponent,
+    PopoverOptsAnunciosComponent
   ],
   
   imports: [
@@ -70,7 +72,8 @@ import { PopoverTopComponent } from '../components/popover-top/popover-top';
     RegisterPage,
     CommentsPage,
     PopoverDenunciarComponent,
-    PopoverTopComponent
+    PopoverTopComponent,
+    PopoverOptsAnunciosComponent
   ],
   providers: [
     StatusBar,

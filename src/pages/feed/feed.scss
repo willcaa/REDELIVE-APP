@@ -47,6 +47,9 @@ page-feed {
     .fixed-content, .scroll-content, .card-md, .card-md .item-md{
         background-color: #fafafa;
     }
+    .item-md.item-block .item-inner {
+        border-bottom: 0!important;
+    }
 
     // CLASES //
     .botao_local{
@@ -61,5 +64,14 @@ page-feed {
         color: #00a2ed;
         font-weight: 700;
         border: 1px solid lightgrey;
+    }
+    .botao-opts {
+        background-color: #fafafa;
+    }
+    .botao-opts .icon {
+        position: absolute;
+        right: 32px;
+        top: 16px;
+        font-size: 32px;
     }
 }
