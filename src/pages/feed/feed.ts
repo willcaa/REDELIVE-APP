@@ -74,10 +74,12 @@ export class FeedPage {
     });
 
     popover.onDidDismiss(popoverData => {
-      this.topOrNews = popoverData;
-      this.index_feed = 0;
-      this.feed = [];
-      this.getUserPosition();
+      if(popoverData) {
+        this.topOrNews = popoverData;
+        this.index_feed = 0;
+        this.feed = [];
+        this.getUserPosition();
+      }
     })
   }
 

@@ -13,7 +13,8 @@
       <div class="fundo-perfil">
         <div class="imagem_fundo" [style.background-image]="getImage(perfil_imagem)">
         </div>
-        <button ion-button color="default" small class="botao-seguir">Seguir</button>
+        <button *ngIf="seguindo" ion-button color="default" small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguindo</button>
+        <button *ngIf="!seguindo" ion-button color="default" small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguir</button>
         <button ion-button color="danger" small class="botao-denunciar" (click)="presentPopover($event)">Denunciar</button>
         <h3 class="nome_usuario">{{ perfil_nome }}</h3>
       </div>
