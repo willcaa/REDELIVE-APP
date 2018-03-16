@@ -1,28 +1,30 @@
 <ion-header>
-    
-    
-    <ion-navbar color="dark">  
-        
-            <ion-title>
-              Publicar
-            </ion-title>
-        
-            <ion-buttons end>
-              <button ion-button (click)="getUserPosition()">
-                publicar
-              </button>
-            </ion-buttons>
-    </ion-navbar>
-    
-    
-    </ion-header>
+  <ion-navbar color="dark"> 
+
+    <ion-title>
+      Criar Publicação
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="getUserPosition()">
+        PUBLICAR
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
   <ion-item>
       <ion-avatar item-start>
-        <img src="assets/imgs/generico.jpg">
+        <img src="{{ foto_usuario }}">
       </ion-avatar>
-      <h2>Nome da pesssoa</h2>
+      <h2>{{ nome_usuario }}</h2>
+      <button color="dark" ion-button small outline icon-start icon-end (click)="alterarTopNews($event)">
+          <ion-icon name="people" isActive="true"></ion-icon>
+            {{ topOrNews }}
+          <ion-icon name="arrow-dropdown" isActive="true"></ion-icon>
+      </button>
   </ion-item>
 
   <ion-item>
@@ -34,16 +36,16 @@
   </ion-item>
   <ion-list style="margin-top: 50px;">
     <ion-item style="border-bottom: solid 1px #eaeaea;border-top: solid 1px #eaeaea;" (click)="getImage()">
-      <ion-icon name="md-images" isActive="true" item-start></ion-icon>
-      Imagem
+      <ion-icon color="secondary" name="images" isActive="true" item-start></ion-icon>
+        Galeria
     </ion-item>
     <ion-item style="border-bottom: solid 1px #eaeaea;" (click)="getImage()">
-      <ion-icon name="ios-camera" isActive="true" item-start></ion-icon>
-        Tirar Foto
+      <ion-icon color="primary" name="camera" isActive="true" item-start></ion-icon>
+        Foto/Video
     </ion-item>
     <ion-item style="border-bottom: solid 1px #eaeaea;" (click)="checkIn()">
-      <ion-icon name="ios-pin-outline" isActive="true" item-start></ion-icon>
-        Fazer Check-in
+      <ion-icon color="danger" name="pin" isActive="true" item-start></ion-icon>
+        Check-in
     </ion-item>
   </ion-list>
 </ion-content>

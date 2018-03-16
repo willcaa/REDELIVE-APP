@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, PopoverController } from 'ionic-angular';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -7,6 +7,7 @@ import { Http, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { AlertController } from 'ionic-angular';
+import { PopoverTopComponent } from '../../components/popover-top/popover-top';
 
 @Component({
   selector: 'page-about',
@@ -25,8 +26,13 @@ export class AboutPage {
   public local_array3: any;
   public local_array4: any;
   public local_array5: any;
+  public userImagem: any;
+  public usuario: any;
+  public nome_usuario: any;
+  public foto_usuario: any;
+  public topOrNews: any = 'TOP';
   userId: any;
-  texto:string;
+  texto:string = "";
   imageURI:any;
   imageFileName:any;
   fileUrl:any;
@@ -35,23 +41,26 @@ export class AboutPage {
   options: GeolocationOptions;
   currentPos: Geoposition;
   
-    constructor(public navCtrl: NavController,
-      private transfer: FileTransfer,
-      private camera: Camera,
-      public loadingCtrl: LoadingController,
-      public toastCtrl: ToastController,
-      public alertCtrl: AlertController,
-      public http: Http,
-      private storage: Storage,
-      private geolocation: Geolocation) {}
+  constructor(public navCtrl: NavController,
+    private transfer: FileTransfer,
+    private camera: Camera,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    public http: Http,
+    private storage: Storage,
+    public popoverCtrl: PopoverController,
+    private geolocation: Geolocation) {
 
-      checkIn() {
-        this.presentLoadingDefault();
-        this.options = {
-          enableHighAccuracy: true
-        };
+  }
+
+  checkIn() {
+    this.presentLoadingDefault();
+    this.options = {
+      enableHighAccuracy: true
+    };
     
-        this.geolocation.getCurrentPosition(this.options).then((pos: Geoposition) => {
+    this.geolocation.getCurrentPosition(this.options).then((pos: Geoposition) => {
     
           this.currentPos = pos;
           console.log(pos.coords.latitude, pos.coords.longitude);
@@ -239,7 +248,7 @@ export class AboutPage {
             this.cidade = data.results[0].address_components[3].long_name;
             this.estado = data.results[0].address_components[5].short_name;
             this.pais = data.results[0].address_components[6].long_name;
-            this.sendPost(pos.coords.latitude, pos.coords.longitude, 1);
+            this.sendPost(pos.coords.latitude, pos.coords.longitude, this.topOrNews);
           });
 
         }, (err: PositionError) => {
@@ -249,47 +258,87 @@ export class AboutPage {
       }
 
 
-      sendPost(lat, long, tipo) {
-        let headers = new Headers();
-        headers.append('Access-Control-Allow-Origin', '*');
-        headers.append('Accept', 'application/json');
-        headers.append('content-type', 'application/json');
-        if (!this.imageFileName) {
-          this.imageFileName = "none";
-        }
+  sendPost(lat, long, tipo) {
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Accept', 'application/json');
+    headers.append('content-type', 'application/json');
+    if (!this.imageFileName) {
+      this.imageFileName = "none";
+    }
+    if(tipo == "TOP") {
+      tipo = 1;
+    } else if(tipo == "NEWS") {
+      tipo = 2;
+    }
 
-        let body = {
-          imagem: this.imageFileName,
-          texto: this.texto,
-          lat: lat,
-          long: long,
-          bairro: this.bairro,
-          cidade: this.cidade,
-          estado: this.estado,
-          pais: this.pais,
-          tipo: tipo,
-          usuario: this.userId,
-          local: this.checkin
-        }
+    let body = {
+      imagem: this.imageFileName,
+      texto: this.texto,
+      lat: lat,
+      long: long,
+      bairro: this.bairro,
+      cidade: this.cidade,
+      estado: this.estado,
+      pais: this.pais,
+      tipo: tipo,
+      usuario: this.userId,
+      local: this.checkin
+    }
 
-        var link = 'https://bluedropsproducts.com/app/anuncios/criar';
-    
-        this.http.post(link, JSON.stringify(body), { headers: headers })
-          .map(res => res.json())
-          .subscribe(data => {
-            this.presentToast(data.data);
-            console.log(data.data);
-            this.navCtrl.push('FeedPage');
-          });
-    
+    var link = 'https://bluedropsproducts.com/app/anuncios/criar';
+
+    this.http.post(link, JSON.stringify(body), { headers: headers })
+      .map(res => res.json())
+      .subscribe(data => {
+        this.presentToast(data.data);
+        console.log(data.data);
+        this.navCtrl.push('FeedPage');
+      });
+
+  }
+
+  getUserInfo() {
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Accept', 'application/json');
+    headers.append('content-type', 'application/json');
+
+    let body = {
+      id_usuario: this.userId
+    }
+
+    let link = 'https://bluedropsproducts.com/app/usuarios/getUserInfo';
+
+    this.http.post(link, JSON.stringify(body), { headers: headers })
+    .map(res => res.json())
+    .subscribe(data => {
+      this.usuario = data['usuario'];
+      this.nome_usuario = this.usuario.nome;
+      this.foto_usuario = this.usuario.user_image;
+    });
+
+  }
+  
+  alterarTopNews(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverTopComponent,{atual:this.topOrNews},{cssClass:"popover-about"});
+    popover.present({
+      ev: myEvent
+    });
+
+    popover.onDidDismiss(popoverData => {
+      if(popoverData) {
+        this.topOrNews = popoverData;
       }
-      
-      ionViewDidLoad() {
-        this.storage.get('meuid').then((val) => {
-          console.log('Id', val);
-          this.userId = val;
-        });
-        console.log('ionViewDidLoad PostPage');
-      }
+    })
+  }
+
+  ionViewDidLoad() {
+    this.storage.get('meuid').then((val) => {
+      console.log('Id', val);
+      this.userId = val;
+      this.getUserInfo();
+    });
+  }
 
 }
