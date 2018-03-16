@@ -10,15 +10,31 @@
 		<ion-title>perfil</ion-title>
 	</ion-navbar>
   <div style="width: 100%">
-      <div class="fundo-perfil">
-        <div class="imagem_fundo" [style.background-image]="getImage(perfil_imagem)">
-        </div>
-        <button *ngIf="seguindo" ion-button color="default" small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguindo</button>
-        <button *ngIf="!seguindo" ion-button color="default" small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguir</button>
-        <button ion-button color="danger" small class="botao-denunciar" (click)="presentPopover($event)">Denunciar</button>
-        <h3 class="nome_usuario">{{ perfil_nome }}</h3>
+    <div class="fundo-perfil">
+      <div class="imagem_fundo" [style.background-image]="getImage(perfil_imagem)">
       </div>
+      <button *ngIf="seguindo" ion-button color="default" small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguindo</button>
+      <button *ngIf="!seguindo" ion-button color="default" small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguir</button>
+      <button ion-button color="danger" small class="botao-denunciar" (click)="presentPopover($event)">Denunciar</button>
+      <h3 class="nome_usuario">{{ perfil_nome }}</h3>
     </div>
+  </div>
+  <ion-item>
+    <ion-row>
+      <ion-col style="text-align: center">
+        <p>{{ stat_anuncios }}</p>
+        <p>Publicações</p>
+      </ion-col>
+      <ion-col style="text-align: center">
+        <p>{{ stat_seguidores }}</p>
+        <p>Seguidores</p>
+      </ion-col>
+      <ion-col style="text-align: center">
+        <p>{{ stat_seguindo }}</p>
+        <p>Seguindo</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
 
       <ion-toolbar id="sendbar" color="light" style="height: 45px; min-height: 0px;">
         <ion-item>

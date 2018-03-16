@@ -19,7 +19,9 @@ import { PopoverDenunciarComponent } from '../../components/popover-denunciar/po
   templateUrl: 'perfil.html',
 })
 export class PerfilPage {
-
+  public stat_anuncios: any = 0;
+  public stat_seguidores: any = 0;
+  public stat_seguindo: any = 0;
   public seguindo: any;
   public userId: any;
   public perfilId: any;
@@ -61,10 +63,30 @@ export class PerfilPage {
         this.perfil_imagem = this.anuncios[0]['user_image'];
         this.usuario_imagem = this.usuario['user_image'];
         this.checkSeguir(this.perfilId, this.userId);
+        this.getStats();
       });
   }
 
+  getStats() {
+    let headers = new Headers();
+      headers.append('Access-Control-Allow-Origin', '*');
+      headers.append('Accept', 'application/json');
+      headers.append('content-type', 'application/json');
 
+      let body = {
+        id_usuario: this.userId
+      }
+
+      let link = 'https://bluedropsproducts.com/app/usuarios/getStats';
+
+      this.http.post(link, JSON.stringify(body), { headers: headers })
+      .map(res => res.json())
+      .subscribe(data => {
+        this.stat_anuncios = data.anuncios;
+        this.stat_seguidores = data.seguidores;
+        this.stat_seguindo = data.seguindo;
+      });
+  }
   seguir(id_perfil, id_usuario) {
     if(id_perfil == id_usuario) {
       this.showAlert("OPA!","Você não pode deixar de seguir você mesmo!","OK");
