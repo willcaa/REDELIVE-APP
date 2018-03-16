@@ -20,6 +20,9 @@
       </ion-avatar>
       <h2>{{ item.nome }}</h2>
       <p>{{ item.minutos }} minutos atrás</p>
+      <button class="botao-trash" (click)="deletarComentario( item )"*ngIf=" item.id_usuario == id_usuario" ion-button icon-only clear small>
+        <ion-icon color="danger" name="trash"></ion-icon>
+      </button>
     </ion-item>
     <ion-card-content>
       <p>{{ item.texto }}</p>

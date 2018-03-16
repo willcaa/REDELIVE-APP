@@ -2,4 +2,10 @@ page-comments {
     .toolbar-md-dark .toolbar-background-md {
         background: linear-gradient(to right, #73395c , #0a2386);
     }
+
+    .botao-trash {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
 }

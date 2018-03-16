@@ -57,19 +57,24 @@
       </ion-card-content>
       <ion-row>
         <ion-col>
-          <img>
-            <button (click)="top( item.id_anuncio, item.likes, item.status_top )" ion-button icon-left clear small>
-              <ion-icon id="arrow{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId" name="md-arrow-up"></ion-icon>
-              <div style="color: #00a2ed" id="top{{ item.id_anuncio }}" *ngIf="item.status_top || item.usuario == userId">Top {{ item.likes }}</div>
-              <div id="top{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId">Top {{ item.likes }}</div>
-            </button>
-          </ion-col>
-          <ion-col>
-            <button (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
-              <ion-icon name="text"></ion-icon>
-              <div>{{ item.comments }}</div>
-            </button>
-          </ion-col>
+          <button (click)="top( item.id_anuncio, item.likes, item.status_top )" ion-button icon-left clear small>
+            <ion-icon id="arrow{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId" name="md-arrow-up"></ion-icon>
+            <div style="color: #00a2ed" id="top{{ item.id_anuncio }}" *ngIf="item.status_top || item.usuario == userId">Top {{ item.likes }}</div>
+            <div id="top{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId">Top {{ item.likes }}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>{{ item.comments }}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button (click)="deleteAnuncio( item )" ion-button icon-left clear small>
+            <ion-icon name="trash"></ion-icon>
+            Deletar
+          </button>
+        </ion-col>
       </ion-row>
     </ion-card>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">

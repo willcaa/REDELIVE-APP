@@ -136,6 +136,45 @@ export class PerfilPage {
     return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);
   }
   
+  deleteAnuncio(post) {
+    let confirm = this.alertCtrl.create({
+      title: 'Você Realmente Deseja Deletar Este Anuncio?',
+      message: 'Caso você delete este anuncio ele desaparecerá permanentemente!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Aceitar',
+          handler: () => {
+            let index = this.anuncios.indexOf(post);
+              if(index > -1){
+                this.anuncios.splice(index, 1);
+              }
+            let headers = new Headers();
+            headers.append('Access-Control-Allow-Origin', '*');
+            headers.append('Accept', 'application/json');
+            headers.append('content-type', 'application/json');
+
+            let body = {
+              id_anuncio: post.id_anuncio,
+            }
+
+            let link = 'https://bluedropsproducts.com/app/anuncios/deletar';
+
+            this.http.post(link, JSON.stringify(body), { headers: headers })
+            .map(res => res.json())
+            .subscribe(data => {
+
+            });
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
   
   loadMore(infiniteScroll = null) {
     this.index_anuncio = this.index_anuncio + 1;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
 
@@ -20,7 +20,7 @@ export class CommentsPage {
   public comments: any;
   public post: any;
   public id_usuario: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private storage: Storage) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private storage: Storage) {
   }
 
   carregarComentarios(){
@@ -43,6 +43,46 @@ export class CommentsPage {
         console.log(data);
         this.comments = data;
     });
+  }
+
+  deletarComentario( comment ) {
+    let confirm = this.alertCtrl.create({
+      title: 'Você Realmente Deseja Deletar Este Comentario?',
+      message: 'Caso você delete este comentario ele desaparecerá permanentemente!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Aceitar',
+          handler: () => {
+            let index = this.comments.indexOf(comment);
+              if(index > -1){
+                this.comments.splice(index, 1);
+              }
+            let headers = new Headers();
+            headers.append('Access-Control-Allow-Origin', '*');
+            headers.append('Accept', 'application/json');
+            headers.append('content-type', 'application/json');
+
+            let body = {
+              commentId: comment.id,
+            }
+
+            let link = 'https://bluedropsproducts.com/app/comments/deletarComentario';
+
+            this.http.post(link, JSON.stringify(body), { headers: headers })
+            .map(res => res.json())
+            .subscribe(data => {
+
+            });
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   enviarComentario(){
