@@ -30,7 +30,7 @@ export class AboutPage {
   public usuario: any;
   public nome_usuario: any;
   public foto_usuario: any;
-  public topOrNews: any = 'TOP';
+  public topOrNews: any = 'Top';
   userId: any;
   texto:string = "";
   imageURI:any;
@@ -266,9 +266,9 @@ export class AboutPage {
     if (!this.imageFileName) {
       this.imageFileName = "none";
     }
-    if(tipo == "TOP") {
+    if(tipo == "Top") {
       tipo = 1;
-    } else if(tipo == "NEWS") {
+    } else if(tipo == "News") {
       tipo = 2;
     }
 
