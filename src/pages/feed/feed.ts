@@ -13,6 +13,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { AlertController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { PopoverTopComponent } from '../../components/popover-top/popover-top';
+import { PopoverOptsAnunciosComponent } from '../../components/popover-opts-anuncios/popover-opts-anuncios';
 /**
  * Generated class for the FeedPage page.
  *
@@ -67,6 +68,52 @@ export class FeedPage {
     }
   }
 
+  denunciarPost(post) {
+    if(post.id_anuncio == this.userId) {
+      this.showAlert("OPA!","Você não pode denunciar o proprio anuncio!","OK");
+    } else {
+      let confirm = this.alertCtrl.create({
+        title: 'Você Realmente Deseja Denunciar Este Anuncio?',
+        message: 'Caso você denuncie este anuncio ele desaparecerá permanentemente do seu feed!',
+        buttons: [
+          {
+            text: 'Cancelar',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: 'Aceitar',
+            handler: () => {
+
+              let index = this.feed.indexOf(post);
+              if(index > -1){
+                this.feed.splice(index, 1);
+              }
+              let headers = new Headers();
+              headers.append('Access-Control-Allow-Origin', '*');
+              headers.append('Accept', 'application/json');
+              headers.append('content-type', 'application/json');
+
+              let body = {
+                id_usuario: this.userId,
+                id_anuncio: post.id_anuncio
+              }
+              var link = 'https://bluedropsproducts.com/app/post/denunciar';
+
+              this.http.post(link, JSON.stringify(body), { headers: headers })
+              .map(res => res.json())
+              .subscribe(data => {
+                
+              });
+            }
+          }
+        ]
+      });
+      confirm.present();
+    }
+  }
+
   alterarTopNews(myEvent) {
     let popover = this.popoverCtrl.create(PopoverTopComponent,{atual:this.topOrNews},{cssClass:"popover-top"});
     popover.present({
@@ -74,11 +121,33 @@ export class FeedPage {
     });
 
     popover.onDidDismiss(popoverData => {
-      this.topOrNews = popoverData;
-      this.index_feed = 0;
-      this.feed = [];
-      this.getUserPosition();
+      if(popoverData) {
+        this.topOrNews = popoverData;
+        this.index_feed = 0;
+        this.feed = [];
+        this.getUserPosition();
+      }
     })
+  }
+
+  opts(id, myEvent) {
+    let popover = this.popoverCtrl.create(PopoverOptsAnunciosComponent,{id_anuncio:id},{cssClass:"popover-anuncio"});
+    popover.present({
+      ev: myEvent
+    });
+
+    popover.onDidDismiss(popoverData => {
+      if(popoverData) {
+        console.log
+      }
+    })
+  }
+
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.getUserPosition();
+      refresher.complete();
+    }, 2000);
   }
 
   alterarLocal(newLocal) {
@@ -136,6 +205,11 @@ export class FeedPage {
     }, (err: PositionError) => {
       console.log("error : " + err.message);
     });
+  }
+
+  showAlert(title, text, button) {
+    let alert = this.alertCtrl.create({ title: title, subTitle: text, buttons: [button] });
+    alert.present();
   }
 
   top(postId, tops, status) {
@@ -320,26 +394,26 @@ export class FeedPage {
     if (e.scrollTop > 1) {
 
       if(document.getElementsByClassName("scroll-content")[1]) {
-        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '88px';
+        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '105px';
       } else {
-        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '88px';
+        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '105px';
       }
-      // document.querySelector(".fixed-content")['style'].marginTop = '88px';
-      // document.querySelector(".scroll-content")['style'].marginTop = '88px';
-      // document.getElementsByClassName("fixed-content")[0]['style'].marginTop = '88px';
-      // document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '88px';
+      // document.querySelector(".fixed-content")['style'].marginTop = '105px';
+      // document.querySelector(".scroll-content")['style'].marginTop = '105px';
+      // document.getElementsByClassName("fixed-content")[0]['style'].marginTop = '105px';
+      // document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '105px';
       
       document.querySelector("#sendbar")['style'].display = 'none';
 
     } 
     if(e.deltaY < 0) {
-      // document.querySelector(".fixed-content")['style'].marginTop = '133px';
-      // document.querySelector(".scroll-content")['style'].marginTop = '133px';
+      // document.querySelector(".fixed-content")['style'].marginTop = '150px';
+      // document.querySelector(".scroll-content")['style'].marginTop = '150px';
 
       if(document.getElementsByClassName("scroll-content")[1]) {
-        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '133px';
+        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '150px';
       } else {
-        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '133px';
+        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '150px';
       }
 
       document.querySelector("#sendbar")['style'].display = 'flex';
