@@ -101,15 +101,10 @@ export class RegisterPage {
   }
 
   getUserDetail(userid) {
-    this.fb.api("/"+userid+"/?fields=id,email,name,gender",["public_profile"])
+    this.fb.api("/"+userid+"/?fields=picture.width(9999).height(9999),id,email,name,gender",["public_profile"])
       .then(res => {
         this.users = res;
-        this.fb.api("/"+userid+"/picture?width=9999",["public_profile"])
-          .then(res => {
-            this.cadastrar(this.users.email, this.users.name, res);
-          }).catch(e => {
-            console.log(e);
-          });
+        this.cadastrar(this.users.email, this.users.name, this.users.picture.data.url);
       })
       .catch(e => {
         console.log(e);
