@@ -40,8 +40,7 @@ export class RegisterPage {
   }
 
   cadastrar(email, nome, imagem) {
-
-    
+  
     this.storage.get('meuid').then((val) => {
       console.log('Id', val);
       this.loginId = val;
@@ -111,8 +110,6 @@ export class RegisterPage {
       });
   }
   
-
-
   ionViewDidLoad() {
     
     console.log('ionViewDidLoad RegisterPage');

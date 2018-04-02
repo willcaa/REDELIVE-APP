@@ -5,6 +5,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { PopoverController } from 'ionic-angular';
 import { PopoverDenunciarComponent } from '../../components/popover-denunciar/popover-denunciar';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { CommentsPage } from '../comments/comments';
 
 /**
  * Generated class for the PerfilPage page.
@@ -32,7 +34,7 @@ export class PerfilPage {
   public perfil_imagem: any;
   public perfil_nome: any;
   public index_anuncio: any;
-  constructor(public navCtrl: NavController,public alertCtrl: AlertController, public popoverCtrl: PopoverController, private _sanitizer: DomSanitizer, public navParams: NavParams, public http: Http, private storage: Storage,) {
+  constructor(public navCtrl: NavController,public alertCtrl: AlertController,public photoViewer: PhotoViewer, public popoverCtrl: PopoverController, private _sanitizer: DomSanitizer, public navParams: NavParams, public http: Http, private storage: Storage,) {
   }
   
   ionViewDidLoad() {
@@ -40,6 +42,29 @@ export class PerfilPage {
     this.userId = this.navParams.get("userId");
     this.carregarPerfil();
   }
+
+  comments(postId) {
+    this.navCtrl.push(CommentsPage, {
+      anuncio: postId
+     });
+     // let headers = new Headers();
+     // headers.append('Access-Control-Allow-Origin', '*');
+     // headers.append('Accept', 'application/json');
+     // headers.append('content-type', 'application/json');
+ 
+     // let body = {
+     //   anuncio: postId,
+     //   liker: this.userId
+     // }
+     // var link = 'https://bluedropsproducts.com/app/likes/top';
+ 
+     // this.http.post(link, JSON.stringify(body), { headers: headers })
+     //   // .map(res => res.json())
+     //   .subscribe(data => {
+     //     console.log(data);
+     //     // console.log(data.data);
+     //   });
+   }
   
   carregarPerfil() {
     let headers = new Headers();
@@ -153,6 +178,9 @@ export class PerfilPage {
     }
   }
 
+  ampliarImagem(imagem,texto) {
+    this.photoViewer.show(imagem,texto,{share:true});
+  }
 
   getImage(image) {
     return this._sanitizer.bypassSecurityTrustStyle(`url(${image})`);

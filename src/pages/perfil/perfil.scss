@@ -4,6 +4,33 @@ page-perfil {
         background: linear-gradient(to right, #73395c , #0a2386);
     }
 
+    .item-md.item-block .item-inner {
+        border: 0;
+    }
+
+    .texto-excluir {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        text-transform: uppercase;
+        line-height: 35px;
+    }
+
+    .botao_local {
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 60%;
+        line-height: 2em;
+        border-radius: 0.25em;
+        background-color: white;
+        color: #00a2ed;
+        font-weight: 700;
+        border: 1px solid lightgrey;
+        
+    }
     .scroll-content {
         padding: 0px !important;
         margin-top: 295px !important;
@@ -78,15 +105,43 @@ page-perfil {
     .fixed-content, .scroll-content, .card-md, .card-md .item-md{
         background-color: #fafafa;
     }
+
+    @keyframes ampliar_btn{
+        from{width: 75px;}
+        to{width: 125px;}
+    }
+
+    @keyframes reduzir_btn{
+        from{width: 125px;}
+        to{width: 75px;}
+    }
+
+    .botao-seguindo {
+        position: absolute;
+        right: 5px;
+        top: 80px;    
+        letter-spacing: 2px;
+        width: 125px;
+        animation: ampliar_btn 1s;
+    }
+
     .botao-seguir {
         position: absolute;
         right: 5px;
         top: 80px;
-        width: 125px;
+        letter-spacing: 2px;
+        width: 75px;
+        animation: reduzir_btn 1s;
     }
+
     .botao-denunciar {
+        color: #fff;
         position: absolute;
-        top: 110px;
-        right: 5px;
+        top: 120px;
+        right: 30px;
+        width: 42px;
+        height: 42px;
+        border: white solid 2px;
+        border-radius: 50%;
     }
 }

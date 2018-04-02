@@ -4,8 +4,6 @@ page-feed {
         height: 30px;
     }
     .toolbar .segment-md .segment-button.activated, .toolbar .segment-md .segment-button.segment-activated {
-        border-bottom: dotted 10px #488aff;
-        margin-bottom: 3px;
         color: #488aff;
     }
     .toolbar-md-dark .toolbar-background-md {
@@ -13,6 +11,15 @@ page-feed {
     }
     .segment-md .segment-button {
         color: #000;
+    }
+
+    .texto-excluir {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        text-transform: uppercase;
+        line-height: 35px;
     }
 
     .border_subheader {
