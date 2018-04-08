@@ -34,7 +34,7 @@ export class FeedPage {
   public feed: any;
   public btnTop: boolean;
   public btnNews: boolean;
-  public topOrNews: any = 'Top';
+  public topOrNews: any = 'News';
   public index_feed: number;
   options: GeolocationOptions;
   currentPos: Geoposition;
@@ -58,7 +58,8 @@ export class FeedPage {
   loginId: number;
   userId: any;
   userImagem: any;
-  local: any;
+  public local: any = "proximidade";
+  public range: any;
   constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
     this.http = http;
     this.start = "";
@@ -171,8 +172,7 @@ export class FeedPage {
       });
   }
 
-  alterarLocal(newLocal) {
-    this.local = newLocal;
+  alterarLocal() {
     this.index_feed = 0;
     this.feed = [];
     this.getUserPosition();
@@ -296,6 +296,32 @@ export class FeedPage {
     });
   }
 
+  rangeChange() {
+    switch(this.range){
+      case 0:
+        break
+      case 100:
+        this.local = "proximidade";
+        break
+      case 200:
+        this.local = "amigos";
+        break
+      case 300:
+        this.local = "bairro";
+        break
+      case 400:
+        this.local = "cidade";
+        break
+      case 500:
+        this.local = "estado";
+        break
+      case 600:
+        this.local = "pais";
+        break
+    }
+    this.alterarLocal();
+  }
+
   loadFeed(lat, long, infiniteScroll) {
 
     let headers = new Headers();
@@ -310,42 +336,28 @@ export class FeedPage {
     this.userId = parseInt(this.userId);
     console.log(this.userId, this.userImagem);
     let tipo:number;
+    
     if(this.topOrNews == "Top") {
       tipo = 1;
     } else if(this.topOrNews == "News") {
       tipo = 2;
     }
 
-    let localNome;
-    // switch(this.local) {
-    //   case "bairro": {
-    //     localNome = this.bairro;
-    //     break;
-    //   }
-    //   case "cidade": {
-    //     localNome = this.cidade;
-    //     break;
-    //   }
-    //   case "estado": {
-    //     localNome = this.estado;
-    //     break;
-    //   }
-    //   case "pais": {
-    //     localNome = this.pais;
-    //     break;
-    //   }
-    // }
+    let localNome = "nulo";
     if(this.local == "bairro"){
       localNome = this.bairro;
-    }
+    } else
     if(this.local == "cidade"){
       localNome = this.cidade;
-    }
+    } else
     if(this.local == "estado"){
       localNome = this.estado;
-    }
+    } else
     if(this.local == "pais"){
       localNome = this.pais;
+    } else
+    if(this.local == "proximidade"){
+      this.topOrNews = "News";
     }
     console.log(localNome);
     let body = {
@@ -592,9 +604,6 @@ export class FeedPage {
   }
 
   ionViewDidLoad() {
-      this.btnTop = true;
-      this.btnNews = false;
-      this.local = "pais";
       this.storage.get('meuid').then((val) => {
         console.log('Id', val);
         this.userId = val;

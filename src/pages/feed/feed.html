@@ -23,38 +23,34 @@
 
   <ion-toolbar class="buttons_header">
 
-    <ion-segment style="color: #000" item-end>
-        <button *ngIf="btnTop" ion-button color="light" style="margin-left: -8px;box-shadow: none; color: blue;" (click)="alterarTopNews($event)">
+    <ion-segment [(ngModel)]="local" style="color: #000" item-end>
+        <button ion-button color="light" style="padding: 0 1px;box-shadow: none; color: blue;" (click)="alterarTopNews($event)">
             <ion-icon name="arrow-up"></ion-icon>
             {{topOrNews}}
-          </button>
-        <button *ngIf="btnNews" ion-button color="light" style="margin-left: -8px;box-shadow: none;">
-          <ion-icon name="arrow-up"></ion-icon>
-          Top
         </button>
-      <ion-segment-button value="1">
+      <ion-segment-button value="proximidade" (ionSelect)="alterarLocal()">
         <ion-icon name="locate"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button aria-pressed="true" id="btt" value="2" (click)="seguidores()">
+      <ion-segment-button value="amigos" (ionSelect)="alterarLocal()">
         <ion-icon name="contacts"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="3" (click)="alterarLocal('bairro')">
+      <ion-segment-button value="bairro" (ionSelect)="alterarLocal()">
         Bairro
       </ion-segment-button>
-      <ion-segment-button value="4" (click)="alterarLocal('cidade')">
+      <ion-segment-button value="cidade" (ionSelect)="alterarLocal()">
         Cidade
       </ion-segment-button>
-      <ion-segment-button value="5" (click)="alterarLocal('estado')">
+      <ion-segment-button value="estado" (ionSelect)="alterarLocal()">
         Estado
       </ion-segment-button>
-      <ion-segment-button value="6" (click)="alterarLocal('pais')">
+      <ion-segment-button value="pais" (ionSelect)="alterarLocal()">
         País
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
-  <ion-item style="height: 20px; background: #f8f8f8; min-height: 0px;">
-      <ion-range min="0" max="500" step="100" snaps="false" color="primary" [(ngModel)]="QQCOISA"></ion-range>
+  <ion-item style="height: 20px; background: #f8f8f8; min-height: 0px;padding-left: 7%;padding-right: 3%;">
+      <ion-range min="0" max="600" step="100" snaps="false" color="primary" (ionChange)="rangeChange()" [(ngModel)]="range"></ion-range>
   </ion-item>
   
 
