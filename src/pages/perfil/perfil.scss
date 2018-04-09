@@ -42,6 +42,7 @@ page-perfil {
     border-radius: 100%;
     mask-image: url("../assets/imgs/perfil_mask.png");
     -webkit-mask-image: url("../assets/imgs/perfil_mask.png");
+    -webkit-mask-size: cover;
     background-origin: initial !important;
     background-size: cover !important;
     background-position: center !important;
@@ -98,12 +99,12 @@ page-perfil {
       width: 75px;
     }
     to {
-      width: 113px;
+      width: 135px;
     }
   }
   @keyframes reduzir_btn {
     from {
-      width: 113px;
+      width: 135px;
     }
     to {
       width: 75px;
@@ -112,8 +113,8 @@ page-perfil {
   .botao-denunciar {
     color: #fff;
     position: absolute;
-    top: 120px;
-    right: 30px;
+    top: 135px;
+    right: 25px;
     width: 42px;
     height: 42px;
     border: white solid 2px;
@@ -121,15 +122,15 @@ page-perfil {
   }
   .botao-seguindo {
     position: relative;
-    right: 12px;
+    right: -3px;
     top: -25px;
-    width: 113px;
+    width: 135px;
     animation: ampliar_btn 1s;
     box-shadow: none;
   }
   .botao-seguir {
     position: relative;
-    right: 12px;
+    right: -3px;
     top: -25px;
     width: 75px;
     animation: reduzir_btn 1s;
@@ -138,7 +139,7 @@ page-perfil {
   .button-like {
     position: absolute;
     right: 0px;
-    top: 67px;
+    top: 75px;
   }
   .bola {
     display: inline-block;
@@ -147,5 +148,6 @@ page-perfil {
     height: 50px;
     position: relative;
     border-radius: 50%;
+    right: -15px;
   }
 }

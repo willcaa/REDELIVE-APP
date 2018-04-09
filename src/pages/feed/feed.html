@@ -23,27 +23,27 @@
 
   <ion-toolbar class="buttons_header">
 
-    <ion-segment [(ngModel)]="local" style="color: #000" item-end>
+    <ion-segment [(ngModel)]="local" color="primary" item-end>
       <button ion-button color="light" style="padding: 0 1px;box-shadow: none; color: blue;" (click)="alterarTopNews($event)">
         <ion-icon name="arrow-up"></ion-icon>
         {{topOrNews}}
       </button>
-      <ion-segment-button value="proximidade" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="proximidade" color="black" (ionSelect)="alterarLocal()">
         <ion-icon name="locate"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="amigos" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="amigos" color="black" (ionSelect)="alterarLocal()">
         <ion-icon name="contacts"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="bairro" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="bairro" color="black" (ionSelect)="alterarLocal()">
         Bairro
       </ion-segment-button>
-      <ion-segment-button value="cidade" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="cidade" color="black" (ionSelect)="alterarLocal()">
         Cidade
       </ion-segment-button>
-      <ion-segment-button value="estado" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="estado" color="black" (ionSelect)="alterarLocal()">
         Estado
       </ion-segment-button>
-      <ion-segment-button value="pais" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="pais" color="black" (ionSelect)="alterarLocal()">
         País
       </ion-segment-button>
     </ion-segment>
