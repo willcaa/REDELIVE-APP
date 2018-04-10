@@ -1,5 +1,32 @@
 popover-top {
-    .list-md {
-        margin-bottom: 0px;
-    }
+	hr {
+		height: 1px;
+		margin: 0 5%;
+		background-color: #d6d6d6;
+	}
+	a {
+		color: #5c71fe;
+		font-size: 1.2rem;
+		float: right;
+		padding-right: 8px;
+		margin: 8px;
+		font-family: arial, sans-serif;
+	}
+  	.list-md {
+		margin-bottom: 0px;
+	}
+	.list-md .item-inner {
+		border: 0 !important;
+	}
+	.list-md .item-inner .label-md {
+		margin: 0px !important;
+	}
+	.list-md .item-md {
+		padding-left: 8px;
+		font-size: 2rem;
+		font-weight: bold;
+	}
+	.icone {
+		float: right;
+	}
 }

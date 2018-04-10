@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, LoadingController, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, NavParams, Content, Platform } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
@@ -60,7 +60,8 @@ export class FeedPage {
   userImagem: any;
   public local: any = "proximidade";
   public range: any;
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
+
+  constructor(public platform: Platform, public navCtrl: NavController, public popoverCtrl: PopoverController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
     this.http = http;
     this.start = "";
     this.destination = "";
@@ -122,7 +123,7 @@ export class FeedPage {
     });
 
     popover.onDidDismiss(popoverData => {
-      if(popoverData) {
+      if(popoverData != this.topOrNews) {
         this.topOrNews = popoverData;
         this.index_feed = 0;
         this.feed = [];
@@ -172,7 +173,50 @@ export class FeedPage {
       });
   }
 
-  alterarLocal() {
+  alterarLocal(val) {
+    if(val == "range") {
+      switch(this.range) {
+        case 0:
+          this.local = "proximidade";
+          break;
+        case 200:
+          this.local = "amigos";
+          break;
+        case 400:
+          this.local = "bairro";
+          break;
+        case 600:
+          this.local = "cidade";
+          break;
+        case 800:
+          this.local = "estado";
+          break;
+        case 1000:
+          this.local = "pais";
+          break;
+      }
+    } else {
+      switch(val) {
+        case "proximidade":
+          this.range = 0;
+          break;
+        case "amigos":
+          this.range = 200;
+          break;
+        case "bairro":
+          this.range = 400;
+          break;
+        case "cidade":
+          this.range = 600;
+          break;
+        case "estado":
+          this.range = 800;
+          break;
+        case "pais":
+          this.range = 1000;
+          break;
+      }
+    }
     this.index_feed = 0;
     this.feed = [];
     this.getUserPosition();
@@ -294,32 +338,6 @@ export class FeedPage {
       this.pais = data.results[0].address_components[6].long_name;
       this.loadFeed(lat,long, infiniteScroll);
     });
-  }
-
-  rangeChange() {
-    switch(this.range){
-      case 0:
-        break
-      case 100:
-        this.local = "proximidade";
-        break
-      case 200:
-        this.local = "amigos";
-        break
-      case 300:
-        this.local = "bairro";
-        break
-      case 400:
-        this.local = "cidade";
-        break
-      case 500:
-        this.local = "estado";
-        break
-      case 600:
-        this.local = "pais";
-        break
-    }
-    this.alterarLocal();
   }
 
   loadFeed(lat, long, infiniteScroll) {

@@ -1,84 +1,123 @@
 page-feed {
-    .buttons_header {
-        min-height: 0px;
-        height: 30px;
-    }
-    .toolbar .segment-md .segment-button.activated, .toolbar .segment-md .segment-button.segment-activated {
-        color: #488aff;
-    }
-    .toolbar-md-dark .toolbar-background-md {
-        background: linear-gradient(to right, #73395c , #0a2386);
-    }
-    .segment-md .segment-button {
-        color: #000;
-    }
-
-    .texto-excluir {
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-size: 16px;
-        text-transform: uppercase;
-        line-height: 35px;
-    }
-
-    .border_subheader {
-        min-height: 0px;
-        height: 30px;
-        border-top: solid 3px #aaa;
-    }
-
-    .segment-button {
-        overflow: visible !important;
-    }
-
-    .ion-md-arrow-up {
-        font-weight: bolder;
-    }
-
-    .button-clear-md{
-        color: #777777 !important;
-    }
-    
-    .button-clear-md:focus {
-        color: #00a2ed !important;
-    }
-
-    .toolbar-md-light .toolbar-background-md{
-        background: #fff;
-    }
-
-    .text-input-md{
-        font-size: small;
-    }
-    .fixed-content, .scroll-content, .card-md, .card-md .item-md{
-        background-color: #fafafa;
-    }
-    .item-md.item-block .item-inner {
-        border-bottom: 0!important;
-    }
-
-    // CLASES //
-    .botao_local{
-        display: inline-block;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        max-width: 60%;
-        line-height: 2em;
-        border-radius: 0.25em;
-        background-color: white;
-        color: #00a2ed;
-        font-weight: 700;
-        border: 1px solid lightgrey;
-    }
-    .botao-opts {
-        background-color: #fafafa;
-    }
-    .botao-opts .icon {
-        position: absolute;
-        right: 32px;
-        top: 16px;
-        font-size: 32px;
-    }
+  .buttons_header {
+    min-height: 0px;
+    height: 30px;
+  }
+  .toolbar .segment-md .segment-button.activated,
+  .toolbar .segment-md .segment-button.segment-activated {
+    color: #488aff;
+  }
+  .toolbar-md-dark .toolbar-background-md {
+    background: linear-gradient(to right, #73395c, #0a2386);
+  }
+  .segment-md .segment-button {
+    color: #000 !important;
+  }
+  .segment-md .segment-button.segment-activated {
+    color: #000 !important;
+  }
+  .texto-excluir {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    line-height: 35px;
+  }
+  .border_subheader {
+    min-height: 0px;
+    height: 30px;
+    border-top: solid 3px #aaa;
+  }
+  .buttons_header .toolbar-background {
+    background-color: #e9eaee;
+  }
+  .segment-button {
+    overflow: visible !important;
+  }
+  .ion-md-arrow-up {
+    font-weight: bolder;
+  }
+  .button-clear-md {
+    color: #777777 !important;
+  }
+  .button-clear-md:focus {
+    color: #00a2ed !important;
+  }
+  .toolbar-md-light .toolbar-background-md {
+    background: #fff;
+  }
+  .text-input-md {
+    font-size: small;
+  }
+  .fixed-content,
+  .scroll-content,
+  .card-md,
+  .card-md .item-md {
+    background-color: #fafafa;
+  }
+  .item-md.item-block .item-inner {
+    border-bottom: 0 !important;
+  } // CLASES //
+  .botao_local {
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 60%;
+    line-height: 2em;
+    border-radius: 0.25em;
+    background-color: white;
+    color: #00a2ed;
+    font-weight: 700;
+    border: 1px solid lightgrey;
+  }
+  .botao-opts {
+    background-color: #fafafa;
+  }
+  .botao-opts .icon {
+    position: absolute;
+    right: 32px;
+    top: 16px;
+    font-size: 32px;
+  }
+  .item-range {
+    height: 24px;
+    background: linear-gradient(0deg, #fff 50%, #e9eaee 50%);
+    min-height: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .item-range .item-inner {
+    padding: 0px !important;
+  }
+  .range-range {
+    padding: 0px !important;
+  }
+  .range-range .range-slider {
+    margin: 0 7% 0 23% !important;
+  }
+  .range-range .range-slider .range-bar {
+    height: 5px;
+    background-color: #7f7f7f;
+    width: 100vw;
+    left: -33%;
+  }
+  .range-range .range-slider .range-bar.range-bar-active {
+    background-color: #00a2e8;
+    width: initial;
+  }
+  .range-range .range-slider .range-knob-handle {
+    top: 22px !important;
+  }
+  .range-range .range-slider .range-knob-handle .range-knob {
+    background-color: #0087c1;
+    border: 5px solid #00a2e8;
+  }
+  .btn-TopOrNews {
+    padding: 0px;
+    box-shadow: none;
+    color: #00a2e8;
+    background-color: #e9eaee;
+  }
 }

@@ -23,34 +23,34 @@
 
   <ion-toolbar class="buttons_header">
 
-    <ion-segment [(ngModel)]="local" color="primary" item-end>
-      <button ion-button color="light" style="padding: 0 1px;box-shadow: none; color: blue;" (click)="alterarTopNews($event)">
-        <ion-icon name="arrow-up"></ion-icon>
+    <ion-segment [(ngModel)]="local" style="padding-top: 6px;" color="primary" item-end>
+      <button ion-button class="btn-TopOrNews" (click)="alterarTopNews($event)">
+        <ion-icon name="md-arrow-round-up" style="padding-right: 3px;"></ion-icon>
         {{topOrNews}}
       </button>
-      <ion-segment-button value="proximidade" color="black" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="proximidade" (ionSelect)="alterarLocal('proximidade')">
         <ion-icon name="locate"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="amigos" color="black" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="amigos" (ionSelect)="alterarLocal('amigos')">
         <ion-icon name="contacts"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="bairro" color="black" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="bairro" (ionSelect)="alterarLocal('bairro')">
         Bairro
       </ion-segment-button>
-      <ion-segment-button value="cidade" color="black" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="cidade" (ionSelect)="alterarLocal('cidade')">
         Cidade
       </ion-segment-button>
-      <ion-segment-button value="estado" color="black" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="estado" (ionSelect)="alterarLocal('estado')">
         Estado
       </ion-segment-button>
-      <ion-segment-button value="pais" color="black" (ionSelect)="alterarLocal()">
+      <ion-segment-button value="pais" (ionSelect)="alterarLocal('pais')">
         País
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
-  <ion-item style="height: 20px; background: #f8f8f8; min-height: 0px;padding-left: 7%;padding-right: 3%;">
-    <ion-range min="0" max="600" step="100" snaps="false" color="primary" (ionChange)="rangeChange()" [(ngModel)]="range"></ion-range>
+  <ion-item>
+    <ion-range class="range-range" min="0" max="1000" step="200" (ionChange)="alterarLocal('range')" [(ngModel)]="range"></ion-range>
   </ion-item>
 
 
