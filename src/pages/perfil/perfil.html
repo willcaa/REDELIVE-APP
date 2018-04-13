@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="dark">
-    <ion-title style="text-align: center;">perfil</ion-title>
+    <ion-title>perfil</ion-title>
   </ion-navbar>
   <div style="width: 100%">
     <div class="fundo-perfil">
@@ -28,11 +28,11 @@
         <p>{{ stat_anuncios }}</p>
         <p>Publicações</p>
       </ion-col>
-      <ion-col style="text-align: center">
+      <ion-col style="text-align: center" (click)="goStats('Seguidores')">
         <p>{{ stat_seguidores }}</p>
         <p>Seguidores</p>
       </ion-col>
-      <ion-col style="text-align: center">
+      <ion-col style="text-align: center" (click)="goStats('Seguindo')">
         <p>{{ stat_seguindo }}</p>
         <p>Seguindo</p>
       </ion-col>

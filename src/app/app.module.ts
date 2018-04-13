@@ -34,6 +34,7 @@ import { LocatonsProvider } from '../providers/locatons/locatons';
 import { PopoverDenunciarComponent } from '../components/popover-denunciar/popover-denunciar';
 import { PopoverTopComponent } from '../components/popover-top/popover-top';
 import { PopoverOptsAnunciosComponent } from '../components/popover-opts-anuncios/popover-opts-anuncios';
+import { StatsPage } from '../pages/stats/stats';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PopoverOptsAnunciosComponent } from '../components/popover-opts-anuncio
     HomePage,
     TabsPage,
     MapPage,
+    StatsPage,
     RegisterPage,
     PopoverDenunciarComponent,
     PopoverTopComponent,
@@ -54,7 +56,9 @@ import { PopoverOptsAnunciosComponent } from '../components/popover-opts-anuncio
   
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      backButtonIcon: 'ios-arrow-back',
+    }),
     IonicStorageModule.forRoot(),
     FeedPageModule,
     HttpModule
@@ -69,6 +73,7 @@ import { PopoverOptsAnunciosComponent } from '../components/popover-opts-anuncio
     HomePage,
     TabsPage,
     MapPage,
+    StatsPage,
     RegisterPage,
     CommentsPage,
     PopoverDenunciarComponent,

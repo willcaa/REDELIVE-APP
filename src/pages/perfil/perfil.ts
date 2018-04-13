@@ -7,6 +7,7 @@ import { PopoverController } from 'ionic-angular';
 import { PopoverDenunciarComponent } from '../../components/popover-denunciar/popover-denunciar';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { CommentsPage } from '../comments/comments';
+import { StatsPage } from '../stats/stats';
 
 /**
  * Generated class for the PerfilPage page.
@@ -89,6 +90,13 @@ export class PerfilPage {
         this.perfil_nome = this.anuncios[0]['nome'];
         this.perfil_imagem = this.anuncios[0]['user_image'];
         this.usuario_imagem = this.usuario['user_image'];
+      });
+  }
+
+  goStats(which) {
+      this.navCtrl.push(StatsPage, {
+        tipo: which,
+        userId: this.userId
       });
   }
 

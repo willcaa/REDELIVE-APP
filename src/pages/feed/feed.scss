@@ -177,4 +177,21 @@ page-feed {
     height: 2rem;
     color: #7f7f7f;
   }
+  .scroll-Images .scroll-content {
+    margin-right: 5px;
+  }
+  .titulo-recentes .toolbar-title-md {
+    padding-left: 5px;
+    color: #7f7f7f;
+    font-size: 1.6rem;
+  }
+  .imagem-recentes {
+    display: block;
+    width: 25vw;
+    margin: 0 1%;
+    height: 25vw;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid #7f7f7f;
+  }
 }
