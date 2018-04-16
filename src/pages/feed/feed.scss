@@ -5,6 +5,18 @@ page-feed {
     height: auto;
   }
   .buttons_header {
+    padding: 20px 0 19px 0;
+  }
+  // IMAGES //
+  img.imageLogoFeed {
+    height: 75px;
+    margin: -16px 0px -24px -20px;
+  }
+  img.imageUserFeed {
+    height: 40px;
+  }
+
+  .buttons_header {
     min-height: 0px;
     height: 30px;
   }

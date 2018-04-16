@@ -8,28 +8,28 @@
 
 
   <ion-toolbar color="dark">
-
+    
     <ion-title>
-      <img src="assets/imgs/logo.png" alt="" style="height: 40px;">
+      <img class="imageLogoFeed" src="assets/imgs/logo.png">
     </ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="goPerfil()">
-        <ion-icon name="person"></ion-icon>
+        <img class="imageUserFeed" src="assets/imgs/user_round.png">
       </button>
     </ion-buttons>
+
   </ion-toolbar>
 
 
   <ion-toolbar class="buttons_header">
 
-    <ion-segment [(ngModel)]="local" style="padding-top: 6px;" color="primary" item-end>
+    <ion-segment [(ngModel)]="local" color="primary" item-end>
       <button ion-button class="btn-TopOrNews" (click)="alterarTopNews($event)">
-        <ion-icon name="md-arrow-round-up" style="padding-right: 3px;"></ion-icon>
-        {{topOrNews}}
+        <img src="assets/imgs/opts.png">
       </button>
-      <ion-segment-button value="proximidade" (ionSelect)="alterarLocal('proximidade')">
-        <ion-icon name="locate"></ion-icon>
+      <ion-segment-button value="proximidade" style="padding-top: 7px" (ionSelect)="alterarLocal('proximidade')">
+        <img src="assets/imgs/local_round.png" style="height: 30px;">
       </ion-segment-button>
       <ion-segment-button value="amigos" (ionSelect)="alterarLocal('amigos')">
         <ion-icon name="contacts"></ion-icon>
