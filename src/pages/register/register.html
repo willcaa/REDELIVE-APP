@@ -10,7 +10,7 @@
 
 
 <ion-content padding>
-  <div *ngIf="isLoggedIn; else facebookLogin">
+  <!-- <div *ngIf="isLoggedIn; else facebookLogin">
     <h2>Hi, {{users.name}} ({{users.email}})</h2>
     <p>
       Gender: {{users.gender}}
@@ -26,12 +26,12 @@
         Logout
       </button>
     </p>
-  </div>
-  <ng-template #facebookLogin>
+  </div> -->
+  <!-- <ng-template #facebookLogin> -->
     <img class="logo-login" src="assets/imgs/logo.png">
     <img class="button-facebook" src="assets/imgs/facebook_entrar.png" (click)="login()">
     <a class="button-temp" (click)="cadastrar('will-kg@hotmail.com', 'Willian Alves', 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/11813515_950106465040645_4723295867195234113_n.jpg?oh=')">
       Teste Registro
     </a>
-  </ng-template>
+  <!-- </ng-template> -->
 </ion-content>

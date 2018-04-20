@@ -1,8 +1,15 @@
 <ion-list>
-  <ion-item (click)="sair(1)" [ngStyle]="{'color': which == 'Top' ? 'blue' : 'black'}">
+  <ion-item (click)="mudar(1)" [ngStyle]="{'color': which == 'Top' ? '#5c71fe' : '#7f7f7f'}">
     Top
+    <ion-icon class="icone" *ngIf="which == 'News'" name="md-radio-button-off"></ion-icon>
+    <ion-icon class="icone" *ngIf="which == 'Top'" name="md-radio-button-on"></ion-icon>
   </ion-item>
-  <ion-item (click)="sair(2)" [ngStyle]="{'color': which == 'News' ? 'blue' : 'black'}">
+  <ion-item (click)="mudar(2)" [ngStyle]="{'color': which == 'News' ? '#5c71fe' : '#7f7f7f'}">
     News
+    <ion-icon class="icone" *ngIf="which == 'News'" name="md-radio-button-on"></ion-icon>
+    <ion-icon class="icone" *ngIf="which == 'Top'" name="md-radio-button-off"></ion-icon>
   </ion-item>
+  <hr>
+  <a (click)="enviar()" >OK</a>
+  <a (click)="cancelar()">CANCEL</a>
 </ion-list>

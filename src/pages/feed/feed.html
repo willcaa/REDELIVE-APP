@@ -7,56 +7,52 @@
 <ion-header>
 
 
-  <ion-toolbar color="dark">  
-
+  <ion-toolbar color="dark">
+    
     <ion-title>
-      <img src="assets/imgs/logo.png" alt="" style="height: 40px;">
+      <img class="imageLogoFeed" src="assets/imgs/logo.png">
     </ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="goPerfil()">
-        <ion-icon name="person"></ion-icon>
+        <img class="imageUserFeed" src="assets/imgs/user_round.png">
       </button>
     </ion-buttons>
+
   </ion-toolbar>
 
 
   <ion-toolbar class="buttons_header">
 
-    <ion-segment style="color: #000" item-end>
-        <button *ngIf="btnTop" ion-button color="light" style="margin-left: -8px;box-shadow: none; color: blue;" (click)="alterarTopNews($event)">
-            <ion-icon name="arrow-up"></ion-icon>
-            {{topOrNews}}
-          </button>
-        <button *ngIf="btnNews" ion-button color="light" style="margin-left: -8px;box-shadow: none;">
-          <ion-icon name="arrow-up"></ion-icon>
-          Top
-        </button>
-      <ion-segment-button value="1">
-        <ion-icon name="locate"></ion-icon>
+    <ion-segment [(ngModel)]="local" color="primary" item-end>
+      <button ion-button class="btn-TopOrNews" (click)="alterarTopNews($event)">
+        <img src="assets/imgs/opts.png">
+      </button>
+      <ion-segment-button value="proximidade" style="padding-top: 7px" (ionSelect)="alterarLocal('proximidade')">
+        <img src="assets/imgs/local_round.png" style="height: 30px;">
       </ion-segment-button>
-      <ion-segment-button aria-pressed="true" id="btt" value="2" (click)="seguidores()">
+      <ion-segment-button value="amigos" (ionSelect)="alterarLocal('amigos')">
         <ion-icon name="contacts"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="3" (click)="alterarLocal('bairro')">
+      <ion-segment-button value="bairro" (ionSelect)="alterarLocal('bairro')">
         Bairro
       </ion-segment-button>
-      <ion-segment-button value="4" (click)="alterarLocal('cidade')">
+      <ion-segment-button value="cidade" (ionSelect)="alterarLocal('cidade')">
         Cidade
       </ion-segment-button>
-      <ion-segment-button value="5" (click)="alterarLocal('estado')">
+      <ion-segment-button value="estado" (ionSelect)="alterarLocal('estado')">
         Estado
       </ion-segment-button>
-      <ion-segment-button value="6" (click)="alterarLocal('pais')">
+      <ion-segment-button value="pais" (ionSelect)="alterarLocal('pais')">
         País
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
-  <ion-item style="height: 20px; background: #f8f8f8; min-height: 0px;">
-      <ion-range min="0" max="500" step="100" snaps="false" color="primary" [(ngModel)]="QQCOISA"></ion-range>
+  <ion-item class="item-range-range" *ngIf="!platform.is('ios')">
+    <ion-range class="range-range" min="0" max="1000" step="200" (ionChange)="alterarLocal('range')" [(ngModel)]="range"></ion-range>
   </ion-item>
-  
+
 
   <!-- <ion-toolbar class="border_subheader">
     <ion-buttons item-start>
@@ -71,19 +67,14 @@
 
   <ion-toolbar id="sendbar" color="light" style="height: 45px; min-height: 0px;">
     <ion-item>
-        <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
-        <ion-avatar item-start>
-          <img src="{{ userImagem }}">
-        </ion-avatar>
-    </ion-item> 
-        <ion-buttons end>
-            <button ion-button icon-only (click)="goImage()">
-              <ion-icon name="camera"></ion-icon>
-            </button>
-    </ion-buttons>
+      <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
+      <ion-avatar item-start>
+        <img src="{{ userImagem }}">
+      </ion-avatar>
+    </ion-item>
     <ion-buttons end>
-      <button (click)="getUserPostPosition()" ion-button icon-only>
-        <ion-icon name="send"></ion-icon>
+      <button ion-button icon-only (click)="goImage()">
+        <ion-icon name="ios-phone-portrait"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -92,11 +83,7 @@
 
 <ion-content #contentRef (ionScroll)="scrollingFun($event)">
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Puxe para Recarregar"
-      refreshingSpinner="crescent"
-      refreshingText="Recaregando...">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Puxe para Recarregar" refreshingSpinner="crescent" refreshingText="Recaregando...">
     </ion-refresher-content>
   </ion-refresher>
   <ion-card *ngFor="let item of feed">
@@ -104,11 +91,13 @@
       <ion-avatar item-start>
         <img src="{{ item.user_image }}" (click)="goPerfil(item.id)">
       </ion-avatar>
-      <h2>{{ item.nome }} <button *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)" class="botao_local">{{ item.local }}</button></h2>
+      <h2>{{ item.nome }}
+        <button *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)" class="botao_local">{{ item.local }}</button>
+      </h2>
       <p>{{ item.data }}</p>
     </ion-item>
     <div style="max-height: 340px; overflow: hidden;">
-      <img *ngIf="item.imagem" (click)="ampliarImagem(item.imagem, item.texto)" src="{{ item.imagem }}">
+      <img *ngIf="item.hasImage == true" (click)="ampliarImagem(item.imagem, item.texto)" src="{{ item.imagem }}">
     </div>
     <ion-card-content>
       <p>{{ item.texto }}</p>
@@ -116,39 +105,54 @@
 
     <ion-row>
 
-      <ion-col col-6>
-        <button *ngIf="userId != item.id" (click)="top( item.id_anuncio, item.likes, item.status_top )" ion-button icon-left clear small>
-          <ion-icon id="arrow{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId" name="md-arrow-up"></ion-icon>
-          <div style="color: #00a2ed" id="top{{ item.id_anuncio }}" *ngIf="item.status_top || item.usuario == userId">Top {{ item.likes }}</div>
-          <div id="top{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId">Top {{ item.likes }}</div>
-        </button>
+      <ion-col col-5 *ngIf="userId == item.id">
         <a class="texto-excluir" *ngIf="userId == item.id">Excluir</a>
       </ion-col>
 
-      <ion-col>
-        <button (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
-          <ion-icon name="text"></ion-icon>
-          <div>{{ item.comments }}</div>
+      <ion-col col-5 *ngIf="userId != item.id">
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="1" [ngStyle]="{'color': item.qtd >= 1 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
         </button>
-        <button ion-button icon-left clear small>
-          <ion-icon name="md-locate"></ion-icon>
-          <ion-badge (click)="navigate(item.lat, item.lng)" item-end >{{ item.distance }} {{ item.unit }}</ion-badge>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="2" [ngStyle]="{'color': item.qtd >= 2 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="3" [ngStyle]="{'color': item.qtd >= 3 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="4" [ngStyle]="{'color': item.qtd >= 4 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="5" [ngStyle]="{'color': item.qtd >= 5 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <ion-item class="item-post-range">
+          <ion-range class="post-range" min="1" max="5" step="1" [(ngModel)]="item.qtd" (ionChange)="enviarEstrelas(item.qtd, item.id_anuncio)"></ion-range>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-7 style="border-left: 1px solid #7f7f7f; margin: 3px 0;">
+        <button style="padding: 0; float: left;" (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          Comentários
+        </button>
+        <button style="padding: 0; float: right;" (click)="navigate(item.lat, item.lng)" ion-button icon-left clear small>
+          <ion-badge item-end>{{ item.distance }} {{ item.unit }}</ion-badge>
         </button>
       </ion-col>
 
-      <!--<ion-col>
-        <button ion-button icon-left clear small (click)="denunciarPost( item )">
-          Denunciar
-        </button>
-      </ion-col>-->
-
     </ion-row>
+
+    <ion-title class="titulo-recentes" *ngIf="item.hasImage == false && item.local">Recentes nesse local:</ion-title>
+    <ion-scroll class="scroll-Images" *ngIf="item.hasImage == false && item.local" scrollX="true" style="width:100%; height:25vw; margin-bottom: 5px;">
+      <ion-row nowrap>
+        <img class="imagem-recentes" *ngFor="let image of item.imagem" (click)="ampliarImagem(item.imagem, item.texto)" src="{{ image }}">
+      </ion-row>
+    </ion-scroll>
 
   </ion-card>
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content loadingText="Carregando...">    
+    <ion-infinite-scroll-content loadingText="Carregando...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
-

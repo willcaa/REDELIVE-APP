@@ -1,147 +1,159 @@
 page-perfil {
-
-    .toolbar-md-dark .toolbar-background-md {
-        background: linear-gradient(to right, #73395c , #0a2386);
+  .toolbar-md-dark .toolbar-background-md {
+    background: linear-gradient(to right, #73395c, #0a2386);
+  }
+  .item-md.item-block .item-inner {
+    border: 0;
+  }
+  .texto-excluir {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    line-height: 35px;
+  }
+  .botao_local {
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 60%;
+    line-height: 2em;
+    border-radius: 0.25em;
+    background-color: white;
+    color: #00a2ed;
+    font-weight: 700;
+    border: 1px solid lightgrey;
+  }
+  .scroll-content {
+    padding: 0px !important;
+    margin-top: 295px !important;
+  }
+  .fundo-perfil {
+    background-image: url("../assets/imgs/fundo_perfil.jpg");
+    background-size: cover;
+    padding: 5% 0px 0px 0px;
+  }
+  .imagem_fundo {
+    width: 120px;
+    height: 120px;
+    margin-left: calc(50% - 60px);
+    border-radius: 100%;
+    mask-image: url("../assets/imgs/perfil_mask.png");
+    -webkit-mask-image: url("../assets/imgs/perfil_mask.png");
+    -webkit-mask-size: cover;
+    background-origin: initial !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  .nome_usuario {
+    text-align: center;
+    margin: 0px;
+    color: white;
+  }
+  .buttons_header {
+    min-height: 0px;
+    height: 30px;
+  }
+  .toolbar .segment-md .segment-button.activated,
+  .toolbar .segment-md .segment-button.segment-activated {
+    border-bottom: dotted 10px #488aff;
+    margin-bottom: 3px;
+    color: #488aff;
+  }
+  .segment-md .segment-button {
+    color: #000;
+  }
+  .border_subheader {
+    min-height: 0px;
+    height: 30px;
+    border-top: solid 3px #aaa;
+  }
+  .segment-button {
+    overflow: visible !important;
+  }
+  .ion-md-arrow-up {
+    font-weight: bolder;
+  }
+  .button-clear-md {
+    color: #777777 !important;
+  }
+  .button-clear-md:focus {
+    color: #00a2ed !important;
+  }
+  .toolbar-md-light .toolbar-background-md {
+    background: #fff;
+  }
+  .text-input-md {
+    font-size: small;
+  }
+  .fixed-content,
+  .scroll-content,
+  .card-md,
+  .card-md .item-md {
+    background-color: #fafafa;
+  }
+  @keyframes ampliar_btn {
+    from {
+      width: 75px;
     }
-
-    .item-md.item-block .item-inner {
-        border: 0;
+    to {
+      width: 135px;
     }
-
-    .texto-excluir {
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-size: 16px;
-        text-transform: uppercase;
-        line-height: 35px;
+  }
+  @keyframes reduzir_btn {
+    from {
+      width: 135px;
     }
-
-    .botao_local {
-        display: inline-block;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        max-width: 60%;
-        line-height: 2em;
-        border-radius: 0.25em;
-        background-color: white;
-        color: #00a2ed;
-        font-weight: 700;
-        border: 1px solid lightgrey;
-        
+    to {
+      width: 75px;
     }
-    .scroll-content {
-        padding: 0px !important;
-        margin-top: 295px !important;
-    }
-
-    .fundo-perfil {
-        background-image: url("../assets/imgs/fundo_perfil.jpg");
-        background-size: cover;
-        padding: 5% 0px 0px 0px;
-    }
-
-    .imagem_fundo {
-        width: 120px;
-        height: 120px;
-        margin-left: calc(50% - 60px);
-        border-radius: 100%;
-        background-origin: initial!important;
-        background-size: cover!important;
-        background-position: center!important;
-    }
-
-    .nome_usuario {
-        text-align: center;
-        margin: 0px;
-        color: white;
-    }
-    
-    .buttons_header {
-        min-height: 0px;
-        height: 30px;
-    }
-
-    .toolbar .segment-md .segment-button.activated, .toolbar .segment-md .segment-button.segment-activated {
-        border-bottom: dotted 10px #488aff;
-        margin-bottom: 3px;
-        color: #488aff;
-    }
-
-    .segment-md .segment-button {
-        color: #000;
-    }
-
-    .border_subheader {
-        min-height: 0px;
-        height: 30px;
-        border-top: solid 3px #aaa;
-    }
-
-    .segment-button {
-        overflow: visible !important;
-    }
-
-    .ion-md-arrow-up {
-        font-weight: bolder;
-    }
-
-    .button-clear-md{
-        color: #777777 !important;
-    }
-    
-    .button-clear-md:focus {
-        color: #00a2ed !important;
-    }
-
-    .toolbar-md-light .toolbar-background-md{
-        background: #fff;
-    }
-
-    .text-input-md{
-        font-size: small;
-    }
-    .fixed-content, .scroll-content, .card-md, .card-md .item-md{
-        background-color: #fafafa;
-    }
-
-    @keyframes ampliar_btn{
-        from{width: 75px;}
-        to{width: 125px;}
-    }
-
-    @keyframes reduzir_btn{
-        from{width: 125px;}
-        to{width: 75px;}
-    }
-
-    .botao-seguindo {
-        position: absolute;
-        right: 5px;
-        top: 80px;    
-        letter-spacing: 2px;
-        width: 125px;
-        animation: ampliar_btn 1s;
-    }
-
-    .botao-seguir {
-        position: absolute;
-        right: 5px;
-        top: 80px;
-        letter-spacing: 2px;
-        width: 75px;
-        animation: reduzir_btn 1s;
-    }
-
-    .botao-denunciar {
-        color: #fff;
-        position: absolute;
-        top: 120px;
-        right: 30px;
-        width: 42px;
-        height: 42px;
-        border: white solid 2px;
-        border-radius: 50%;
-    }
+  }
+  .botao-denunciar {
+    color: #fff;
+    position: absolute;
+    top: 135px;
+    right: 25px;
+    width: 42px;
+    height: 42px;
+    border: white solid 2px;
+    border-radius: 50%;
+  }
+  .botao-seguindo {
+    position: relative;
+    right: -3px;
+    top: -25px;
+    width: 135px;
+    text-transform: none;
+    letter-spacing: 1px;
+    animation: ampliar_btn 1s;
+    box-shadow: none;
+    background-color: #3897f0;
+  }
+  .botao-seguir {
+    position: relative;
+    right: -3px;
+    top: -25px;
+    width: 75px;
+    text-transform: none;
+    letter-spacing: 1px;
+    animation: reduzir_btn 1s;
+    box-shadow: none;
+    background-color: #3897f0;
+  }
+  .button-like {
+    position: absolute;
+    right: 0px;
+    top: 75px;
+  }
+  .bola {
+    display: inline-block;
+    background-color: #3897f0;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    border-radius: 50%;
+    right: -15px;
+  }
 }

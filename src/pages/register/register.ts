@@ -4,6 +4,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Facebook } from '@ionic-native/facebook';
 import { Storage } from '@ionic/storage';
+import { StatusBar } from '@ionic-native/status-bar';
 /**
  * Generated class for the RegisterPage page.
  *
@@ -23,10 +24,11 @@ export class RegisterPage {
   start: string;
   data:any = {};
   loginId: number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController, private fb: Facebook, private storage: Storage) {
+  constructor(public navCtrl: NavController, private statusBar: StatusBar, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController, private fb: Facebook, private storage: Storage) {
     this.http = http;
     this.start = "";
     this.destination = "";
+    this.statusBar.backgroundColorByHexString("#412e6d");
     fb.getLoginStatus()
     .then(res => {
       console.log(res.status);

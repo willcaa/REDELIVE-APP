@@ -7,6 +7,7 @@ import { PopoverController } from 'ionic-angular';
 import { PopoverDenunciarComponent } from '../../components/popover-denunciar/popover-denunciar';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { CommentsPage } from '../comments/comments';
+import { StatsPage } from '../stats/stats';
 
 /**
  * Generated class for the PerfilPage page.
@@ -40,6 +41,8 @@ export class PerfilPage {
   ionViewDidLoad() {
     this.perfilId = this.navParams.get("perfilId");
     this.userId = this.navParams.get("userId");
+    this.checkSeguir(this.perfilId, this.userId);
+    this.getStats();
     this.carregarPerfil();
   }
 
@@ -87,8 +90,13 @@ export class PerfilPage {
         this.perfil_nome = this.anuncios[0]['nome'];
         this.perfil_imagem = this.anuncios[0]['user_image'];
         this.usuario_imagem = this.usuario['user_image'];
-        this.checkSeguir(this.perfilId, this.userId);
-        this.getStats();
+      });
+  }
+
+  goStats(which) {
+      this.navCtrl.push(StatsPage, {
+        tipo: which,
+        userId: this.userId
       });
   }
 
@@ -99,7 +107,7 @@ export class PerfilPage {
       headers.append('content-type', 'application/json');
 
       let body = {
-        id_usuario: this.userId
+        id_usuario: this.perfilId
       }
 
       let link = 'https://bluedropsproducts.com/app/usuarios/getStats';

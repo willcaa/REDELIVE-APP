@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, LoadingController, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, NavParams, Content, Platform } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
@@ -34,7 +34,7 @@ export class FeedPage {
   public feed: any;
   public btnTop: boolean;
   public btnNews: boolean;
-  public topOrNews: any = 'Top';
+  public topOrNews: any = 'News';
   public index_feed: number;
   options: GeolocationOptions;
   currentPos: Geoposition;
@@ -58,14 +58,38 @@ export class FeedPage {
   loginId: number;
   userId: any;
   userImagem: any;
-  local: any;
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
+  public local: any = "proximidade";
+  public range: any;
+
+  constructor(public platform: Platform, public navCtrl: NavController, public popoverCtrl: PopoverController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
     this.http = http;
     this.start = "";
     this.destination = "";
     for (let i = 1; i <= 50; i++) {
       this.items.push({ "number": i });
     }
+  }
+
+  enviarEstrelas(stars, anuncio) {
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Accept', 'application/json');
+    headers.append('content-type', 'application/json');
+    headers.append('Access-Control-Expose-Headers', "true");
+
+    let body = {
+      id_usuario: this.userId,
+      id_anuncio: anuncio,
+      n_estrelas: stars
+    }
+
+    var link = 'https://bluedropsproducts.com/app/anuncios/stars';
+
+    this.http.post(link, JSON.stringify(body), { headers: headers })
+      .map(res => res.json())
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
   denunciarPost(post) {
@@ -121,7 +145,7 @@ export class FeedPage {
     });
 
     popover.onDidDismiss(popoverData => {
-      if(popoverData) {
+      if(popoverData != this.topOrNews && (popoverData == "Top" || popoverData == "News")) {
         this.topOrNews = popoverData;
         this.index_feed = 0;
         this.feed = [];
@@ -171,8 +195,50 @@ export class FeedPage {
       });
   }
 
-  alterarLocal(newLocal) {
-    this.local = newLocal;
+  alterarLocal(val) {
+    if(val == "range") {
+      switch(this.range) {
+        case 0:
+          this.local = "proximidade";
+          break;
+        case 200:
+          this.local = "amigos";
+          break;
+        case 400:
+          this.local = "bairro";
+          break;
+        case 600:
+          this.local = "cidade";
+          break;
+        case 800:
+          this.local = "estado";
+          break;
+        case 1000:
+          this.local = "pais";
+          break;
+      }
+    } else {
+      switch(val) {
+        case "proximidade":
+          this.range = 0;
+          break;
+        case "amigos":
+          this.range = 200;
+          break;
+        case "bairro":
+          this.range = 400;
+          break;
+        case "cidade":
+          this.range = 600;
+          break;
+        case "estado":
+          this.range = 800;
+          break;
+        case "pais":
+          this.range = 1000;
+          break;
+      }
+    }
     this.index_feed = 0;
     this.feed = [];
     this.getUserPosition();
@@ -310,42 +376,28 @@ export class FeedPage {
     this.userId = parseInt(this.userId);
     console.log(this.userId, this.userImagem);
     let tipo:number;
+    
     if(this.topOrNews == "Top") {
       tipo = 1;
     } else if(this.topOrNews == "News") {
       tipo = 2;
     }
 
-    let localNome;
-    // switch(this.local) {
-    //   case "bairro": {
-    //     localNome = this.bairro;
-    //     break;
-    //   }
-    //   case "cidade": {
-    //     localNome = this.cidade;
-    //     break;
-    //   }
-    //   case "estado": {
-    //     localNome = this.estado;
-    //     break;
-    //   }
-    //   case "pais": {
-    //     localNome = this.pais;
-    //     break;
-    //   }
-    // }
+    let localNome = "nulo";
     if(this.local == "bairro"){
       localNome = this.bairro;
-    }
+    } else
     if(this.local == "cidade"){
       localNome = this.cidade;
-    }
+    } else
     if(this.local == "estado"){
       localNome = this.estado;
-    }
+    } else
     if(this.local == "pais"){
       localNome = this.pais;
+    } else
+    if(this.local == "proximidade"){
+      this.topOrNews = "News";
     }
     console.log(localNome);
     let body = {
@@ -592,9 +644,6 @@ export class FeedPage {
   }
 
   ionViewDidLoad() {
-      this.btnTop = true;
-      this.btnNews = false;
-      this.local = "pais";
       this.storage.get('meuid').then((val) => {
         console.log('Id', val);
         this.userId = val;
