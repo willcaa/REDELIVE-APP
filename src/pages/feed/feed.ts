@@ -466,9 +466,9 @@ export class FeedPage {
     if (e.scrollTop > 1) {
 
       if(document.getElementsByClassName("scroll-content")[1]) {
-        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '105px';
+        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '120px';
       } else {
-        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '105px';
+        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '120px';
       }
       // document.querySelector(".fixed-content")['style'].marginTop = '105px';
       // document.querySelector(".scroll-content")['style'].marginTop = '105px';
@@ -483,9 +483,9 @@ export class FeedPage {
       // document.querySelector(".scroll-content")['style'].marginTop = '150px';
 
       if(document.getElementsByClassName("scroll-content")[1]) {
-        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '150px';
+        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '165px';
       } else {
-        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '150px';
+        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '165px';
       }
 
       document.querySelector("#sendbar")['style'].display = 'flex';

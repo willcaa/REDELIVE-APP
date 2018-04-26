@@ -46,6 +46,15 @@ export class PerfilPage {
     this.carregarPerfil();
   }
 
+  doRefresh(refresher) {
+    setTimeout(() => {
+      this.checkSeguir(this.perfilId, this.userId);
+     this.getStats();
+     this.carregarPerfil();
+      refresher.complete();
+    }, 2000);
+  }
+
   comments(postId) {
     this.navCtrl.push(CommentsPage, {
       anuncio: postId

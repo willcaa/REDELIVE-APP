@@ -9,11 +9,11 @@ page-feed {
   }
   // IMAGES //
   img.imageLogoFeed {
-    height: 75px;
-    margin: -16px 0px -24px -20px;
+    height: 50px;
+    margin: 0 0 -4px -12px
   }
   img.imageUserFeed {
-    height: 40px;
+    height: 32px;
   }
 
   .buttons_header {
@@ -29,9 +29,11 @@ page-feed {
   }
   .segment-md .segment-button {
     color: #000 !important;
+    border: 0;
   }
   .segment-md .segment-button.segment-activated {
-    color: #000 !important;
+    color: #00a2e8 !important;
+    border: 0;
   }
   .texto-excluir {
     display: block;

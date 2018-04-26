@@ -9,6 +9,7 @@ import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { IonicStorageModule } from '@ionic/storage';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { AboutPage } from '../pages/about/about';
 import { CommentsPage } from '../pages/comments/comments';
@@ -94,7 +95,8 @@ import { StatsPage } from '../pages/stats/stats';
     Camera,
     Facebook,
     PhotoViewer,
-    LocatonsProvider
+    LocatonsProvider,
+    ScreenOrientation
   ]
 })
 export class AppModule {}

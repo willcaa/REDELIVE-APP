@@ -9,57 +9,46 @@
   <ion-navbar color="dark">
     <ion-title>perfil</ion-title>
   </ion-navbar>
-  <div style="width: 100%">
-    <div class="fundo-perfil">
-      <div class="imagem_fundo" [style.background-image]="getImage(perfil_imagem)">
-      </div>
-      <div class="button-like">
-        <span class="bola"></span>
-        <button *ngIf="seguindo" ion-button small class="botao-seguindo" (click)="seguir(perfilId, userId)">Seguindo</button>
-        <button *ngIf="!seguindo" ion-button small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguir</button>
-      </div>
-      <img src="assets/imgs/plug.png" class="botao-denunciar" (click)="presentPopover($event)">
-      <h3 class="nome_usuario">{{ perfil_nome }}</h3>
-    </div>
-  </div>
-  <ion-item>
-    <ion-row>
-      <ion-col style="text-align: center">
-        <p>{{ stat_anuncios }}</p>
-        <p>Publicações</p>
-      </ion-col>
-      <ion-col style="text-align: center" (click)="goStats('Seguidores')">
-        <p>{{ stat_seguidores }}</p>
-        <p>Seguidores</p>
-      </ion-col>
-      <ion-col style="text-align: center" (click)="goStats('Seguindo')">
-        <p>{{ stat_seguindo }}</p>
-        <p>Seguindo</p>
-      </ion-col>
-    </ion-row>
-  </ion-item>
 
-  <!--<ion-toolbar id="sendbar" color="light" style="height: 45px; min-height: 0px;">
-        <ion-item>
-            <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
-            <ion-avatar item-start>
-              <img src="{{ usuario_imagem }}">
-            </ion-avatar>
-        </ion-item> 
-            <ion-buttons end>
-                <button ion-button icon-only (click)="goImage()">
-                  <ion-icon name="camera"></ion-icon>
-                </button>
-        </ion-buttons>
-        <ion-buttons end>
-          <button (click)="getUserPostPosition()" ion-button icon-only>
-            <ion-icon name="send"></ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-toolbar>-->
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Puxe para Recarregar" refreshingSpinner="crescent" refreshingText="Recaregando...">
+        </ion-refresher-content>
+      </ion-refresher>
+    
+    <div style="width: 100%">
+        <div class="fundo-perfil">
+          <div class="imagem_fundo" [style.background-image]="getImage(perfil_imagem)">
+          </div>
+          <div class="button-like">
+            <span class="bola"></span>
+            <button *ngIf="seguindo" ion-button small class="botao-seguindo" (click)="seguir(perfilId, userId)">Seguindo</button>
+            <button *ngIf="!seguindo" ion-button small class="botao-seguir" (click)="seguir(perfilId, userId)">Seguir</button>
+          </div>
+          <img src="assets/imgs/plug.png" class="botao-denunciar" (click)="presentPopover($event)">
+          <h3 class="nome_usuario">{{ perfil_nome }}</h3>
+        </div>
+      </div>
+    
+      <ion-item>
+        <ion-row>
+          <ion-col style="text-align: center">
+            <p>{{ stat_anuncios }}</p>
+            <p>Publicações</p>
+          </ion-col>
+          <ion-col style="text-align: center" (click)="goStats('Seguidores')">
+            <p>{{ stat_seguidores }}</p>
+            <p>Seguidores</p>
+          </ion-col>
+          <ion-col style="text-align: center" (click)="goStats('Seguindo')">
+            <p>{{ stat_seguindo }}</p>
+            <p>Seguindo</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      
   <ion-card *ngFor="let item of anuncios">
     <ion-item>
       <ion-avatar item-start>

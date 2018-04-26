@@ -28,7 +28,6 @@ page-perfil {
   }
   .scroll-content {
     padding: 0px !important;
-    margin-top: 295px !important;
   }
   .fundo-perfil {
     background-image: url("../assets/imgs/fundo_perfil.jpg");
@@ -96,25 +95,25 @@ page-perfil {
   }
   @keyframes ampliar_btn {
     from {
-      width: 75px;
+      width: 25vw;
     }
     to {
-      width: 135px;
+      width: 36.5vmin;
     }
   }
   @keyframes reduzir_btn {
     from {
-      width: 135px;
+      width: 36.5vmin;
     }
     to {
-      width: 75px;
+      width: 25vw;
     }
   }
   .botao-denunciar {
     color: #fff;
     position: absolute;
-    top: 135px;
-    right: 25px;
+    top: 20vw;
+    right: 5vh;
     width: 42px;
     height: 42px;
     border: white solid 2px;
@@ -123,8 +122,8 @@ page-perfil {
   .botao-seguindo {
     position: relative;
     right: -3px;
-    top: -25px;
-    width: 135px;
+    top: 7px;
+    width: 36.5vmin;
     text-transform: none;
     letter-spacing: 1px;
     animation: ampliar_btn 1s;
@@ -134,18 +133,19 @@ page-perfil {
   .botao-seguir {
     position: relative;
     right: -3px;
-    top: -25px;
-    width: 75px;
+    top: 7.5px;
+    width: 25vw;
     text-transform: none;
     letter-spacing: 1px;
     animation: reduzir_btn 1s;
     box-shadow: none;
     background-color: #3897f0;
+    float: right;
   }
   .button-like {
     position: absolute;
-    right: 0px;
-    top: 75px;
+    right: 0;
+    top: 18.750px;
   }
   .bola {
     display: inline-block;
@@ -155,5 +155,6 @@ page-perfil {
     position: relative;
     border-radius: 50%;
     right: -15px;
+    float: left;
   }
 }

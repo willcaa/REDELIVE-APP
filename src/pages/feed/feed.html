@@ -28,8 +28,9 @@
       <button ion-button class="btn-TopOrNews" (click)="alterarTopNews($event)">
         <img src="assets/imgs/opts.png">
       </button>
-      <ion-segment-button value="proximidade" style="padding-top: 7px" (ionSelect)="alterarLocal('proximidade')">
-        <img src="assets/imgs/local_round.png" style="height: 30px;">
+      <ion-segment-button value="proximidade" style="padding-top: 8px;" (ionSelect)="alterarLocal('proximidade')">
+        <img *ngIf="local == 'proximidade'" src="assets/imgs/local_round_blue.png" style="height: 24px;">
+        <img *ngIf="local != 'proximidade'" src="assets/imgs/local_round_black.png" style="height: 24px;">
       </ion-segment-button>
       <ion-segment-button value="amigos" (ionSelect)="alterarLocal('amigos')">
         <ion-icon name="contacts"></ion-icon>
@@ -91,17 +92,18 @@
       <ion-avatar item-start>
         <img src="{{ item.user_image }}" (click)="goPerfil(item.id)">
       </ion-avatar>
-      <h2>{{ item.nome }}
-        <button *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)" class="botao_local">{{ item.local }}</button>
-      </h2>
+      <P style="white-space: initial; max-width: 80%;">
+        <b>{{ item.nome }}</b>
+        <span *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)"> está em <b><ion-icon name="ios-pin"></ion-icon> {{ item.local }}</b></span>
+      </P>
       <p>{{ item.data }}</p>
     </ion-item>
-    <div style="max-height: 340px; overflow: hidden;">
-      <img *ngIf="item.hasImage == true" (click)="ampliarImagem(item.imagem, item.texto)" src="{{ item.imagem }}">
-    </div>
     <ion-card-content>
       <p>{{ item.texto }}</p>
     </ion-card-content>
+    <div style="max-height: 340px; overflow: hidden;">
+      <img *ngIf="item.hasImage == true" (click)="ampliarImagem(item.imagem, item.texto)" src="{{ item.imagem }}">
+    </div>
 
     <ion-row>
 
