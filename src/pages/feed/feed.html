@@ -68,7 +68,7 @@
 
   <ion-toolbar id="sendbar" color="light" style="height: 45px; min-height: 0px;" (click)="goImage()">
     <ion-item>
-      <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
+      <p>O que gostaria de informar ?</p>
       <ion-avatar item-start>
         <img src="{{ userImagem }}">
       </ion-avatar>
@@ -87,7 +87,7 @@
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Puxe para Recarregar" refreshingSpinner="crescent" refreshingText="Recaregando...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let item of feed">
+  <ion-card *ngFor="let item of feed" style="width: 100%; margin: 10px 0;">
     <ion-item>
       <ion-avatar item-start>
         <img src="{{ item.user_image }}" (click)="goPerfil(item.id)">
