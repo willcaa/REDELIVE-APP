@@ -11,6 +11,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
+
 import { AboutPage } from '../pages/about/about';
 import { CommentsPage } from '../pages/comments/comments';
 import { CheckinPage } from '../pages/checkin/checkin'
@@ -52,7 +53,8 @@ import { StatsPage } from '../pages/stats/stats';
     RegisterPage,
     PopoverDenunciarComponent,
     PopoverTopComponent,
-    PopoverOptsAnunciosComponent
+    PopoverOptsAnunciosComponent,
+    SplashScreen
   ],
   
   imports: [
@@ -79,7 +81,8 @@ import { StatsPage } from '../pages/stats/stats';
     CommentsPage,
     PopoverDenunciarComponent,
     PopoverTopComponent,
-    PopoverOptsAnunciosComponent
+    PopoverOptsAnunciosComponent,
+    SplashScreen
   ],
   providers: [
     StatusBar,

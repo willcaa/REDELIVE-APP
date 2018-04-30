@@ -27,7 +27,7 @@
     <p>{{ checkin }}</p>
   </ion-item>
   <ion-item>
-      <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
+      <ion-textarea [(ngModel)]="texto" rows="8" placeholder="O que gostaria de informar?"></ion-textarea>
   </ion-item>
   <ion-list style="margin-top: 50px;">
     <ion-item style="border-bottom: solid 1px #eaeaea;border-top: solid 1px #eaeaea;" (click)="getImage()">

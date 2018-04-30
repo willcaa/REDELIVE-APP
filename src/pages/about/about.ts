@@ -232,7 +232,7 @@ export class AboutPage {
       }
 
       getUserPosition() {
-        this.presentLoadingDefault();
+        //this.presentLoadingDefault();
         this.options = {
           enableHighAccuracy: true
         };

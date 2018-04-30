@@ -96,20 +96,20 @@
     <plugin name="cordova-plugin-filepath" spec="^1.2.0" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.16" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.2.7">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCLkiFqMM18SU203d3umbqPUwTF1Jb9ooA" />
+        <variable name="API_KEY_FOR_ANDROID" value="com.redelive" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyApOhFId8D1I0ZS0CF-A21D8dqAQbqhN-k" />
     </plugin>
     <plugin name="cordova-sqlite-storage" spec="^2.2.1" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.1.5" />
-    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
-        <variable name="APP_ID" value="1505918069504571" />
-        <variable name="APP_NAME" value="Redelive" />
-    </plugin>
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-screen-orientation" spec="~3.0.1" />
-    <engine name="android" spec="7.1.0" />
+    <plugin name="cordova-plugin-facebook4" spec="^2.0.1">
+        <variable name="APP_ID" value="1505918069504571" />
+        <variable name="APP_NAME" value="Redelive" />
+    </plugin>
     <engine name="browser" spec="5.0.3" />
+    <engine name="android" spec="7.0.0" />
 </widget>
