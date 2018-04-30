@@ -24,7 +24,6 @@ import { RegisterPage } from '../pages/register/register';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 import { FeedPageModule } from '../pages/feed/feed.module';
 import { Geolocation } from '@ionic-native/geolocation';
 import { File } from '@ionic-native/file';
@@ -53,8 +52,7 @@ import { StatsPage } from '../pages/stats/stats';
     RegisterPage,
     PopoverDenunciarComponent,
     PopoverTopComponent,
-    PopoverOptsAnunciosComponent,
-    SplashScreen
+    PopoverOptsAnunciosComponent
   ],
   
   imports: [
@@ -81,12 +79,10 @@ import { StatsPage } from '../pages/stats/stats';
     CommentsPage,
     PopoverDenunciarComponent,
     PopoverTopComponent,
-    PopoverOptsAnunciosComponent,
-    SplashScreen
+    PopoverOptsAnunciosComponent
   ],
   providers: [
     StatusBar,
-    SplashScreen,
     Geolocation,
     GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

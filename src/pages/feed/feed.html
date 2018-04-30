@@ -66,7 +66,7 @@
     </ion-buttons>
   </ion-toolbar> -->
 
-  <ion-toolbar id="sendbar" color="light" style="height: 45px; min-height: 0px;">
+  <ion-toolbar id="sendbar" color="light" style="height: 45px; min-height: 0px;" (click)="goImage()">
     <ion-item>
       <ion-input [(ngModel)]="texto" placeholder="O que gostaria de informar?"></ion-input>
       <ion-avatar item-start>
@@ -74,7 +74,7 @@
       </ion-avatar>
     </ion-item>
     <ion-buttons end>
-      <button ion-button icon-only (click)="goImage()">
+      <button ion-button icon-only>
         <ion-icon name="ios-phone-portrait"></ion-icon>
       </button>
     </ion-buttons>
