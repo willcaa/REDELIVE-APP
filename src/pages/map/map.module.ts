@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { MapPage } from './map';
 
 @NgModule({
-  declarations: [
-    MapPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(MapPage),
   ],

@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { CommentsPage } from './comments';
 
 @NgModule({
-  declarations: [
-    CommentsPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(CommentsPage),
   ],

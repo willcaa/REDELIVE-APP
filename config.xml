@@ -110,5 +110,5 @@
         <variable name="APP_NAME" value="Redelive" />
     </plugin>
     <engine name="browser" spec="5.0.3" />
-    <engine name="android" spec="7.0.0" />
+    <engine name="android" spec="7.1.0" />
 </widget>

@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { PerfilPage } from './perfil';
 
 @NgModule({
-  declarations: [
-    PerfilPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(PerfilPage),
   ],

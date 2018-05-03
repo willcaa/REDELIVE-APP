@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { StatsPage } from './stats';
 
 @NgModule({
-  declarations: [
-    StatsPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(StatsPage),
   ],

@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { PopoverOptsAnunciosComponent } from './popover-opts-anuncios/popover-opts-anuncios';
 @NgModule({
-	declarations: [PopoverOptsAnunciosComponent],
+	declarations: [],
 	imports: [],
-	exports: [PopoverOptsAnunciosComponent]
+	exports: []
 })
 export class ComponentsModule {}

@@ -6,7 +6,7 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button (click)="getUserPosition()">
+      <button ion-button *ngIf="!publicando" (click)="getUserPosition()">
         PUBLICAR
       </button>
     </ion-buttons>

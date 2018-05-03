@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { CheckinPage } from './checkin';
 
 @NgModule({
-  declarations: [
-    CheckinPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(CheckinPage),
   ],

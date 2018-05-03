@@ -31,6 +31,7 @@ export class AboutPage {
   public nome_usuario: any;
   public foto_usuario: any;
   public topOrNews: any = 'Top';
+  public publicando: boolean;
   userId: any;
   texto:string = "";
   imageURI:any;
@@ -233,6 +234,7 @@ export class AboutPage {
 
       getUserPosition() {
         //this.presentLoadingDefault();
+        this.publicando = true;
         this.options = {
           enableHighAccuracy: true
         };
@@ -337,6 +339,7 @@ export class AboutPage {
     this.storage.get('meuid').then((val) => {
       console.log('Id', val);
       this.userId = val;
+      this.publicando = false;
       this.getUserInfo();
     });
   }
