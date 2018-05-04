@@ -56,7 +56,7 @@ export class AboutPage {
   }
 
   checkIn() {
-    this.presentLoadingDefault();
+    //this.presentLoadingDefault();
     this.options = {
       enableHighAccuracy: true
     };

@@ -261,7 +261,7 @@ export class FeedPage {
     this.getUserPosition(infiniteScroll);
   }
 
-  ampliarImagem(imagem,texto) {
+  ampliarImagem(imagem,texto = "") {
     this.photoViewer.show(imagem,texto,{share:true});
   }
 
@@ -270,7 +270,7 @@ export class FeedPage {
     let options: LaunchNavigatorOptions = {
       start: this.start
     };
-
+    
     this.launchNavigator.navigate(this.destination, options)
         .then(
             success => alert('Launched navigator'),
