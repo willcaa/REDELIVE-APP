@@ -69,50 +69,19 @@ export class AboutPage {
     
           let url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + pos.coords.latitude + "," + pos.coords.longitude + "&rankby=distance&key=AIzaSyDSO6Siell1ljeulEnHXDL4a5pfrCttnTc";
           this.http.get(url2).map(res => res.json()).subscribe(data2 => {
-            this.local_array1 = data2.results[0].name;
-            this.local_array2 = data2.results[1].name;
-            this.local_array3 = data2.results[2].name;
-            this.local_array4 = data2.results[3].name;
-            this.local_array5 = data2.results[4].name;
     
             let alert = this.alertCtrl.create();
             alert.setTitle('Onde Você está?');
         
-            alert.addInput({
-              type: 'radio',
-              label: this.local_array1,
-              value: this.local_array1,
-              checked: false
-            });
-        
-            alert.addInput({
-              type: 'radio',
-              label: this.local_array2,
-              value: this.local_array2,
-              checked: false
-            });
-        
-            alert.addInput({
-              type: 'radio',
-              label: this.local_array3,
-              value: this.local_array3,
-              checked: false
-            });
-        
-            alert.addInput({
-              type: 'radio',
-              label: this.local_array4,
-              value: this.local_array4,
-              checked: false
-            });
-        
-            alert.addInput({
-              type: 'radio',
-              label: this.local_array5,
-              value: this.local_array5,
-              checked: false
-            });
-        
+            for(var i = 0; i < 20; i++) {
+              alert.addInput({
+                type: 'radio',
+                label: data2.results[i].name,
+                value: data2.results[i].name,
+                checked: false
+              });
+            }
+
             alert.addButton('Cancel');
             alert.addButton({
               text: 'OK',

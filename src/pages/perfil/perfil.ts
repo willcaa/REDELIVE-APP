@@ -35,12 +35,14 @@ export class PerfilPage {
   public perfil_imagem: any;
   public perfil_nome: any;
   public index_anuncio: any;
+  enviandoSeguir: boolean;
   constructor(public navCtrl: NavController,public alertCtrl: AlertController,public photoViewer: PhotoViewer, public popoverCtrl: PopoverController, private _sanitizer: DomSanitizer, public navParams: NavParams, public http: Http, private storage: Storage,) {
   }
   
   ionViewDidLoad() {
     this.perfilId = this.navParams.get("perfilId");
     this.userId = this.navParams.get("userId");
+    this.enviandoSeguir = false;
     this.checkSeguir(this.perfilId, this.userId);
     this.getStats();
     this.carregarPerfil();
@@ -132,7 +134,8 @@ export class PerfilPage {
   seguir(id_perfil, id_usuario) {
     if(id_perfil == id_usuario) {
       this.showAlert("OPA!","Você não pode deixar de seguir você mesmo!","OK");
-    } else if(this.seguindo) {
+    } else if(this.seguindo && !this.enviandoSeguir) {
+      this.enviandoSeguir = true;
       let headers = new Headers();
       headers.append('Access-Control-Allow-Origin', '*');
       headers.append('Accept', 'application/json');
@@ -149,8 +152,10 @@ export class PerfilPage {
       .map(res => res.json())
       .subscribe(data => {
         this.seguindo = false;
+        this.enviandoSeguir = false;
       });
-    } else {
+    } else if(!this.seguindo && !this.enviandoSeguir) {
+      this.enviandoSeguir = true;
       let headers = new Headers();
       headers.append('Access-Control-Allow-Origin', '*');
       headers.append('Accept', 'application/json');
@@ -167,6 +172,7 @@ export class PerfilPage {
       .map(res => res.json())
       .subscribe(data => {
         this.seguindo = true;
+        this.enviandoSeguir = false;
       });
     }
   }
@@ -195,8 +201,8 @@ export class PerfilPage {
     }
   }
 
-  ampliarImagem(imagem,texto) {
-    this.photoViewer.show(imagem,texto,{share:true});
+  ampliarImagem(imagem, texto = "") {
+    this.photoViewer.show('https://bluedropsproducts.com/app/uploads/'+imagem,texto,{share:true});
   }
 
   getImage(image) {
@@ -234,7 +240,7 @@ export class PerfilPage {
             this.http.post(link, JSON.stringify(body), { headers: headers })
             .map(res => res.json())
             .subscribe(data => {
-
+            
             });
           }
         }

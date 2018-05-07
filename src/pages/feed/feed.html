@@ -96,7 +96,7 @@
         <b>{{ item.nome }}</b>
         <span *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)"> está em <b><ion-icon name="ios-pin"></ion-icon> {{ item.local }}</b></span>
       </P>
-      <p>{{ item.data }}</p>
+      <p>{{ item.atras }}</p>
     </ion-item>
     <ion-card-content>
       <p>{{ item.texto }}</p>
@@ -108,7 +108,7 @@
     <ion-row>
 
       <ion-col col-5 *ngIf="userId == item.id">
-        <a class="texto-excluir" *ngIf="userId == item.id">Excluir</a>
+        <a class="texto-excluir" *ngIf="userId == item.id" (click)="deleteAnuncio(item.id_anuncio)">Excluir</a>
       </ion-col>
 
       <ion-col col-5 *ngIf="userId != item.id">
@@ -144,8 +144,8 @@
 
     </ion-row>
 
-    <ion-title class="titulo-recentes" *ngIf="item.hasImage == false && item.local">Recentes nesse local:</ion-title>
-    <ion-scroll class="scroll-Images" *ngIf="item.hasImage == false && item.local" scrollX="true" style="width:100%; height:25vw; margin-bottom: 5px;">
+    <ion-title class="titulo-recentes" *ngIf="item.hasImage == false && item.local && item.imagem">Recentes nesse local:</ion-title>
+    <ion-scroll class="scroll-Images" *ngIf="item.hasImage == false && item.local && item.imagem" scrollX="true" style="width:100%; height:25vw; margin-bottom: 5px;">
       <ion-row nowrap>
         <img class="imagem-recentes" *ngFor="let image of item.imagem" (click)="ampliarImagem(image)" src="{{ image }}">
       </ion-row>

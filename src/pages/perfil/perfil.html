@@ -54,17 +54,18 @@
       <ion-avatar item-start>
         <img src="{{ item.user_image }}">
       </ion-avatar>
-      <h2>{{ item.nome }}
-        <button *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)" class="botao_local">{{ item.local }}</button>
-      </h2>
-      <p>{{ item.data }}</p>
+      <P style="white-space: initial; max-width: 80%;">
+          <b>{{ item.nome }}</b>
+          <span *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)"> está em <b><ion-icon name="ios-pin"></ion-icon> {{ item.local }}</b></span>
+        </P>
+      <p>{{ item.atras }}</p>
     </ion-item>
-    <div style="max-height: 340px; overflow: hidden;">
-      <img *ngIf="item.imagem && item.imagem != 'none'" (click)="ampliarImagem(item.imagem, item.texto)" src="https://bluedropsproducts.com/app/uploads/{{ item.imagem }}">
-    </div>
     <ion-card-content>
       <p>{{ item.texto }}</p>
     </ion-card-content>
+    <div style="max-height: 340px; overflow: hidden;">
+      <img *ngIf="item.imagem && item.imagem != 'none'" (click)="ampliarImagem(item.imagem, item.texto)" src="https://bluedropsproducts.com/app/uploads/{{ item.imagem }}">
+    </div>
     <ion-row>
       <ion-col col-6>
         <button *ngIf="userId != item.id" (click)="top( item.id_anuncio, item.likes, item.status_top )" ion-button icon-left clear
@@ -73,7 +74,7 @@
           <div style="color: #00a2ed" id="top{{ item.id_anuncio }}" *ngIf="item.status_top || item.usuario == userId">Top {{ item.likes }}</div>
           <div id="top{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId">Top {{ item.likes }}</div>
         </button>
-        <a class="texto-excluir" *ngIf="userId == item.id">Excluir</a>
+        <a class="texto-excluir" *ngIf="userId == item.id" (click)="deleteAnuncio(item.id_anuncio)">Excluir</a>
       </ion-col>
       <ion-col>
         <button (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
