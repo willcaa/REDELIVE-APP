@@ -296,7 +296,8 @@ export class FeedPage {
             this.http.post(link, JSON.stringify(body), { headers: headers })
             .map(res => res.json())
             .subscribe(data => {
-  
+              console.log(data)
+              post.id_anuncio
             });
           }
         }

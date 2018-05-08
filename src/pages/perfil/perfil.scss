@@ -157,4 +157,69 @@ page-perfil {
     right: -15px;
     float: left;
   }
+  .item-post-range {
+    margin-top: -2%;
+    height: 24px;
+    background: #7f7f7f;
+    min-height: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .item-post-range .item-inner {
+    padding: 0px !important;
+  }
+  .post-range {
+    padding: 0px !important;
+  }
+  .post-range .range-slider {
+    margin: 0 10% 0 10% !important;
+  }
+  .post-range .range-slider .range-bar {
+    height: 5px;
+    background-color: #7f7f7f;
+    width: 200%;
+    left: -33%;
+  }
+  .post-range .range-slider .range-bar.range-bar-active {
+    background-color: #00a2e8;
+    width: initial;
+  }
+  .post-range .range-slider .range-knob-handle {
+    top: 22px !important;
+  }
+  .post-range .range-slider .range-knob-handle .range-knob {
+    background-color: #0087c1;
+    border: 5px solid #00a2e8;
+  }
+  .btn-star {
+    height: 2rem;
+    border: 0;
+    padding: 0;
+    width: 20%;
+    margin-right: -2.5%;
+    background-color: #fafafa;
+  }
+  .icon-star {
+    font-size: 2rem;
+    line-height: 2rem;
+    height: 2rem;
+    color: #7f7f7f;
+  }
+  .scroll-Images .scroll-content {
+    margin-right: 5px;
+  }
+  .titulo-recentes .toolbar-title-md {
+    padding-left: 5px;
+    color: #7f7f7f;
+    font-size: 1.6rem;
+  }
+  .imagem-recentes {
+    display: block;
+    width: 25vw;
+    margin: 0 1%;
+    height: 25vw;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid #7f7f7f;
+  }
 }

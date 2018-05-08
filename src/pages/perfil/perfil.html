@@ -67,21 +67,39 @@
       <img *ngIf="item.imagem && item.imagem != 'none'" (click)="ampliarImagem(item.imagem, item.texto)" src="https://bluedropsproducts.com/app/uploads/{{ item.imagem }}">
     </div>
     <ion-row>
-      <ion-col col-6>
-        <button *ngIf="userId != item.id" (click)="top( item.id_anuncio, item.likes, item.status_top )" ion-button icon-left clear
-          small>
-          <ion-icon id="arrow{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId" name="md-arrow-up"></ion-icon>
-          <div style="color: #00a2ed" id="top{{ item.id_anuncio }}" *ngIf="item.status_top || item.usuario == userId">Top {{ item.likes }}</div>
-          <div id="top{{ item.id_anuncio }}" *ngIf="!item.status_top && item.usuario != userId">Top {{ item.likes }}</div>
-        </button>
-        <a class="texto-excluir" *ngIf="userId == item.id" (click)="deleteAnuncio(item.id_anuncio)">Excluir</a>
+
+      <ion-col col-5 *ngIf="userId == item.id">
+        <a class="texto-excluir" *ngIf="userId == item.id" (click)="deleteAnuncio(item)">Excluir</a>
       </ion-col>
-      <ion-col>
-        <button (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
+
+      <ion-col col-5 *ngIf="userId != item.id">
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="1" [ngStyle]="{'color': item.qtd >= 1 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="2" [ngStyle]="{'color': item.qtd >= 2 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="3" [ngStyle]="{'color': item.qtd >= 3 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="4" [ngStyle]="{'color': item.qtd >= 4 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <button class="btn-star">
+          <ion-icon class="icon-star" name="md-star" value="5" [ngStyle]="{'color': item.qtd >= 5 ? '#ffc90e' : '#7f7f7f'}"></ion-icon>
+        </button>
+        <ion-item class="item-post-range">
+          <ion-range class="post-range" min="1" max="5" step="1" [(ngModel)]="item.qtd" (ionChange)="enviarEstrelas(item.qtd, item.id_anuncio)"></ion-range>
+        </ion-item>
+
+      </ion-col>
+      <ion-col col-7 style="border-left: 1px solid #7f7f7f; margin: 3px 0;">
+        <button style="padding: 0; float: left;" (click)="comments( item.id_anuncio )" ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
-          <p>Comentar</p>
+          Comentários
         </button>
       </ion-col>
+
     </ion-row>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">

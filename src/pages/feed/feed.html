@@ -108,7 +108,7 @@
     <ion-row>
 
       <ion-col col-5 *ngIf="userId == item.id">
-        <a class="texto-excluir" *ngIf="userId == item.id" (click)="deleteAnuncio(item.id_anuncio)">Excluir</a>
+        <a class="texto-excluir" *ngIf="userId == item.id" (click)="deleteAnuncio(item)">Excluir</a>
       </ion-col>
 
       <ion-col col-5 *ngIf="userId != item.id">
