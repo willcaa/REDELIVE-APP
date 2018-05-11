@@ -25,7 +25,8 @@
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="SplashScreenDelay" value="4000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="loadUrlTimeoutValue" value="700000" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -110,5 +111,5 @@
         <variable name="APP_NAME" value="Redelive" />
     </plugin>
     <engine name="browser" spec="5.0.3" />
-    <engine name="android" spec="7.1.0" />
+    <engine name="android" spec="^7.0.0" />
 </widget>
