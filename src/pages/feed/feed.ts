@@ -411,8 +411,6 @@ export class FeedPage {
     headers.append('content-type', 'application/json');
     headers.append('Access-Control-Expose-Headers', "true"); 
 
-    let options = new RequestOptions({ headers: headers });
-
     console.log(this.userId, this.userImagem);
     this.userId = parseInt(this.userId);
     console.log(this.userId, this.userImagem);
@@ -694,15 +692,7 @@ export class FeedPage {
       console.log('Image', val);
       this.userImagem = val;
     });
-   
-    this.topOrBottom=this.contentHandle._tabsPlacement;
-    this.contentBox=document.querySelector("#sendbar")['style'];
-  
-    if (this.topOrBottom == "top") {
-      this.tabBarHeight = this.contentBox.marginTop;
-    } else if (this.topOrBottom == "bottom") {
-      this.tabBarHeight = this.contentBox.marginBottom;
-    }
+
     console.log('ionViewDidLoad FeedPage');
     
     // alert("teste");

@@ -20,7 +20,7 @@ export class AboutPage {
   public cidade: string;
   public estado: string;
   public pais: string;
-  public checkin: any;
+  public checkin: any = null;
   public local_array1: any;
   public local_array2: any;
   public local_array3: any;
@@ -151,10 +151,6 @@ export class AboutPage {
       }
 
       uploadFile() {
-        let loader = this.loadingCtrl.create({
-          content: "Carregando..."
-        });
-        loader.present();
         const fileTransfer: FileTransferObject = this.transfer.create();
         
 
@@ -178,12 +174,10 @@ export class AboutPage {
         fileTransfer.upload(this.imageURI, encodeURI('https://bluedropsproducts.com/upload.php'), options)
           .then((data) => {
           console.log(data+" Uploaded Successfully");
-          loader.dismiss();
           this.presentToast("Image uploaded successfully");
           this.fileUrl = "https://bluedropsproducts.com/app/uploads/" + this.imageFileName;
         }, (err) => {
           console.log(err);
-          loader.dismiss();
           this.presentToast(err);
         });
       }
@@ -242,6 +236,9 @@ export class AboutPage {
     } else if(tipo == "News") {
       tipo = 2;
     }
+    if(this.checkin == null) {
+      this.checkin = "none";
+    }
 
     let body = {
       imagem: this.imageFileName,
@@ -262,7 +259,7 @@ export class AboutPage {
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
       .subscribe(data => {
-        this.presentToast(data.data);
+        //this.presentToast(data.data);
         console.log(data.data);
         this.navCtrl.push('FeedPage');
       });
