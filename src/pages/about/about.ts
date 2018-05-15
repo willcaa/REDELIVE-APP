@@ -113,7 +113,10 @@ export class AboutPage {
         const options: CameraOptions = {
           quality: 100,
           destinationType: this.camera.DestinationType.FILE_URI,
-          sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+          sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+          correctOrientation: true,
+          targetWidth: 1600,
+          targetHeight: 1600
         }
       
         this.camera.getPicture(options).then((imageData) => {
@@ -135,7 +138,10 @@ export class AboutPage {
         const options: CameraOptions = {
           quality: 100,
           destinationType: this.camera.DestinationType.FILE_URI,
-          sourceType: this.camera.PictureSourceType.CAMERA
+          sourceType: this.camera.PictureSourceType.CAMERA,
+          correctOrientation: true,
+          targetWidth: 1600,
+          targetHeight: 1600
         }
       
         this.camera.getPicture(options).then((imageData) => {
@@ -174,7 +180,6 @@ export class AboutPage {
         fileTransfer.upload(this.imageURI, encodeURI('https://bluedropsproducts.com/upload.php'), options)
           .then((data) => {
           console.log(data+" Uploaded Successfully");
-          this.presentToast("Image uploaded successfully");
           this.fileUrl = "https://bluedropsproducts.com/app/uploads/" + this.imageFileName;
         }, (err) => {
           console.log(err);
@@ -236,9 +241,6 @@ export class AboutPage {
     } else if(tipo == "News") {
       tipo = 2;
     }
-    if(this.checkin == null) {
-      this.checkin = "none";
-    }
 
     let body = {
       imagem: this.imageFileName,
@@ -259,11 +261,11 @@ export class AboutPage {
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
       .subscribe(data => {
+        this.publicando = false;
         //this.presentToast(data.data);
         console.log(data.data);
         this.navCtrl.push('FeedPage');
       });
-
   }
 
   getUserInfo() {

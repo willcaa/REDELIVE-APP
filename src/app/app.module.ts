@@ -35,6 +35,7 @@ import { LocatonsProvider } from '../providers/locatons/locatons';
 import { PopoverDenunciarComponent } from '../components/popover-denunciar/popover-denunciar';
 import { PopoverTopComponent } from '../components/popover-top/popover-top';
 import { PopoverOptsAnunciosComponent } from '../components/popover-opts-anuncios/popover-opts-anuncios';
+import { PopoverNotificacoesComponent } from '../components/popover-notificacoes/popover-notificacoes';
 import { StatsPage } from '../pages/stats/stats';
 
 @NgModule({
@@ -52,7 +53,8 @@ import { StatsPage } from '../pages/stats/stats';
     RegisterPage,
     PopoverDenunciarComponent,
     PopoverTopComponent,
-    PopoverOptsAnunciosComponent
+    PopoverOptsAnunciosComponent,
+    PopoverNotificacoesComponent
   ],
   
   imports: [
@@ -79,7 +81,8 @@ import { StatsPage } from '../pages/stats/stats';
     CommentsPage,
     PopoverDenunciarComponent,
     PopoverTopComponent,
-    PopoverOptsAnunciosComponent
+    PopoverOptsAnunciosComponent,
+    PopoverNotificacoesComponent
   ],
   providers: [
     StatusBar,

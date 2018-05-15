@@ -131,6 +131,7 @@ export class PerfilPage {
         this.stat_seguindo = data.seguindo;
       });
   }
+  
   seguir(id_perfil, id_usuario) {
     if(id_perfil == id_usuario) {
       this.showAlert("OPA!","Você não pode deixar de seguir você mesmo!","OK");

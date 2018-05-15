@@ -14,6 +14,7 @@ import { AlertController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { PopoverTopComponent } from '../../components/popover-top/popover-top';
 import { PopoverOptsAnunciosComponent } from '../../components/popover-opts-anuncios/popover-opts-anuncios';
+import { PopoverNotificacoesComponent } from '../../components/popover-notificacoes/popover-notificacoes';
 /**
  * Generated class for the FeedPage page.
  *
@@ -60,6 +61,7 @@ export class FeedPage {
   userImagem: any;
   public local: any = "proximidade";
   public range: any;
+  public notificacoes_qts: any;
 
   constructor(public platform: Platform, public navCtrl: NavController, public popoverCtrl: PopoverController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, public loadingCtrl: LoadingController, private storage: Storage, private photoViewer: PhotoViewer) {
     this.http = http;
@@ -68,6 +70,26 @@ export class FeedPage {
     for (let i = 1; i <= 50; i++) {
       this.items.push({ "number": i });
     }
+  }
+
+  getQtdNotificacoes() {
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Accept', 'application/json');
+    headers.append('content-type', 'application/json');
+    headers.append('Access-Control-Expose-Headers', "true");
+
+    let body = {
+      id_usuario: this.userId,
+    }
+
+    var link = 'https://bluedropsproducts.com/app/usuarios/notificacoes_qtd';
+
+    this.http.post(link, JSON.stringify(body), { headers: headers })
+      .map(res => res.json())
+      .subscribe(data => {
+        this.notificacoes_qts = data;
+      });
   }
 
   enviarEstrelas(stars, anuncio) {
@@ -153,17 +175,66 @@ export class FeedPage {
       }
     })
   }
+  opts(myEvent, post) {
+    let popover = this.popoverCtrl.create(PopoverOptsAnunciosComponent,{},{cssClass:"popover-opts"});
+    popover.present({
+      ev: myEvent
+    });
 
-  opts(id, myEvent) {
-    let popover = this.popoverCtrl.create(PopoverOptsAnunciosComponent,{id_anuncio:id},{cssClass:"popover-anuncio"});
+    popover.onDidDismiss(popoverData => {
+      if(popoverData == "denunciar") {
+        let headers = new Headers();
+        headers.append('Access-Control-Allow-Origin', '*');
+        headers.append('Accept', 'application/json');
+        headers.append('content-type', 'application/json');
+
+        let body = {
+          id_usuario: this.userId,
+          id_anuncio: post.id
+        }
+        var link = 'https://bluedropsproducts.com/app/anuncios/denunciarAnuncio';
+
+        this.http.post(link, JSON.stringify(body), { headers: headers })
+        .map(res => res.json())
+        .subscribe(data => {
+          let index = this.feed.indexOf(post);
+            if(index > -1){
+              this.feed.splice(index, 1);
+            }
+        });
+      }
+    });
+
+  }
+  notificacoes(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverNotificacoesComponent,{id_usuario: this.userId},{cssClass:"popover-notificacoes"});
     popover.present({
       ev: myEvent
     });
 
     popover.onDidDismiss(popoverData => {
       if(popoverData) {
-        console.log
+        if(popoverData.tipo == "perfil") {
+          this.goPerfil(popoverData.id);
+        } else if(popoverData.tipo == "post") {
+          this.comments(popoverData.id);
+        }
       }
+      let headers = new Headers();
+      headers.append('Access-Control-Allow-Origin', '*');
+      headers.append('Accept', 'application/json');
+      headers.append('content-type', 'application/json');
+
+      let body = {
+        id_usuario: this.userId,
+      }
+      var link = 'https://bluedropsproducts.com/app/usuarios/limparNotificacoes';
+
+      this.http.post(link, JSON.stringify(body), { headers: headers })
+      .map(res => res.json())
+      .subscribe(data => {
+        this.notificacoes_qts = 0;
+      });
     })
   }
 
@@ -400,6 +471,7 @@ export class FeedPage {
       this.estado = data.results[0].address_components[5].short_name;
       this.pais = data.results[0].address_components[6].long_name;
       this.loadFeed(lat,long, infiniteScroll);
+      this.getQtdNotificacoes();
     });
   }
 
@@ -504,30 +576,17 @@ export class FeedPage {
   scrollingFun(e) {
     if (e.scrollTop > 1) {
 
-      if(document.getElementsByClassName("scroll-content")[1]) {
-        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '120px';
-      } else {
-        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '120px';
-      }
-      // document.querySelector(".fixed-content")['style'].marginTop = '105px';
-      // document.querySelector(".scroll-content")['style'].marginTop = '105px';
-      // document.getElementsByClassName("fixed-content")[0]['style'].marginTop = '105px';
-      // document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '105px';
-      
+      document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '120px';
+      document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '120px';
       document.querySelector("#sendbar")['style'].display = 'none';
 
     } 
     if(e.deltaY < 0) {
-      // document.querySelector(".fixed-content")['style'].marginTop = '150px';
-      // document.querySelector(".scroll-content")['style'].marginTop = '150px';
 
-      if(document.getElementsByClassName("scroll-content")[1]) {
-        document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '165px';
-      } else {
-        document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '165px';
-      }
-
+      document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '165px';
+      document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '165px';
       document.querySelector("#sendbar")['style'].display = 'flex';
+
     }//if 
   }//scrollingFun
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the PopoverOptsAnunciosComponent component.
@@ -12,11 +13,10 @@ import { Component } from '@angular/core';
 })
 export class PopoverOptsAnunciosComponent {
 
-  text: string;
+  constructor(public viewCtrl: ViewController) {
 
-  constructor() {
-    console.log('Hello PopoverOptsAnunciosComponent Component');
-    this.text = 'Hello World';
   }
-
+  denunciar() {
+    this.viewCtrl.dismiss("denunciar");
+  }
 }

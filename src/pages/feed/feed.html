@@ -14,6 +14,11 @@
     </ion-title>
 
     <ion-buttons end>
+      <button id="notification-button" ion-button clear (click)="notificacoes($event)">
+        <ion-icon name="notifications">
+          <ion-badge *ngIf="notificacoes_qts != 0" id="notifications-badge" color="primary">{{ notificacoes_qts }}</ion-badge>
+        </ion-icon>
+      </button>
       <button ion-button icon-only (click)="goPerfil()">
         <img class="imageUserFeed" src="assets/imgs/user_round.png">
       </button>
@@ -97,6 +102,9 @@
         <span *ngIf="item.local != null" (click)="navigate(item.lat, item.lng)"> está em <b><ion-icon name="ios-pin"></ion-icon> {{ item.local }}</b></span>
       </P>
       <p>{{ item.atras }}</p>
+      <button class="button-more" ion-button icon-only clear (click)="opts($event, item)">
+        <ion-icon name="more"></ion-icon>
+      </button>
     </ion-item>
     <ion-card-content>
       <p>{{ item.texto }}</p>

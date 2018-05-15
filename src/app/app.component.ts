@@ -10,7 +10,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = RegisterPage;
+  rootPage: any;
 
   constructor(platform: Platform, statusBar: StatusBar, screen: ScreenOrientation, storage: Storage) {
     platform.ready().then(() => {

@@ -208,4 +208,27 @@ page-feed {
     background-size: contain;
     border: 1px solid #7f7f7f;
   }
+  #notification-button {            
+    position: relative;
+    width: 42px;
+    top:1px;
+    right: 1px;
+    overflow: visible!important;
+  }
+  #notifications-badge {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      border-radius: 100%;
+      padding-top: 3px;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+  }
+  .button-more {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
 }
