@@ -154,7 +154,7 @@ export class AboutPage {
         this.presentLoadingDefault();
         this.publicando = true;
 
-        if(this.imageURI != null) {
+        if(this.imageURI != "") {
           const fileTransfer: FileTransferObject = this.transfer.create();
           
           let formattedDate = new Date();
@@ -305,25 +305,29 @@ export class AboutPage {
   }
 
   reset() {
-    this.local_array = null;
-    this.bairro = null;
-    this.cidade = null;
-    this.estado = null;
-    this.pais = null;
+    this.local_array = [];
+    this.bairro = "";
+    this.cidade = "";
+    this.estado = "";
+    this.pais = "";
     this.checkin = null;
+    this.local_array1 = "";
+    this.local_array2 = "";
+    this.local_array3 = "";
+    this.local_array4 = "";
+    this.local_array5 = "";
     this.userImagem = null;
-    this.usuario = null;
-    this.nome_usuario = null;
-    this.foto_usuario = null;
-    this.publicando = null;
+    this.nome_usuario = "";
+    this.foto_usuario = "";
+    this.topOrNews = 'Top';
+    this.publicando = false;
+    this.userId = 0;
     this.texto = "";
-    this.imageURI = null;
-    this.imageFileName = null;
-    this.fileUrl = null;
+    this.imageURI = "";
+    this.imageFileName = "";
+    this.fileUrl = "";
     this.local = "bairro";
-    this.localFileName = null;
-    this.options = null;
-    this.currentPos = null;
+    this.localFileName = "";
   }
 
   ionViewDidLoad() {
