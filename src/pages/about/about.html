@@ -6,7 +6,7 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button *ngIf="!publicando" (click)="getUserPosition()">
+      <button ion-button *ngIf="!publicando" (click)="uploadFile()">
         PUBLICAR
       </button>
     </ion-buttons>
@@ -23,7 +23,7 @@
   </ion-item>
 
   <ion-item>
-    <img src="{{fileUrl}}" alt="" width="100%" height="100%"/>
+    <img src="{{ imageURI }}" alt="" width="100%" height="100%"/>
     <p>{{ checkin }}</p>
   </ion-item>
   <ion-item>

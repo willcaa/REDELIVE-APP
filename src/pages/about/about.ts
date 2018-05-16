@@ -34,14 +34,14 @@ export class AboutPage {
   public publicando: boolean;
   userId: any;
   texto:string = "";
-  imageURI:any;
+  public imageURI:any;
   imageFileName:any;
   fileUrl:any;
   local: any = "bairro";
   localFileName:any;
   options: GeolocationOptions;
   currentPos: Geoposition;
-  
+  loading: any;
   constructor(public navCtrl: NavController,
     private transfer: FileTransfer,
     private camera: Camera,
@@ -98,15 +98,11 @@ export class AboutPage {
 
 
       presentLoadingDefault() {
-        let loading = this.loadingCtrl.create({
+        this.loading = this.loadingCtrl.create({
           content: 'Publicando...'
         });
       
-        loading.present();
-      
-        setTimeout(() => {
-          loading.dismiss();
-        }, 5000);
+        this.loading.present();
       }
       
       getImage() {
@@ -124,7 +120,6 @@ export class AboutPage {
           let path = imageData;
           let new_path = path.substring(path.indexOf('s'));
           this.localFileName = new_path;
-          this.uploadFile();
         }, (err) => {
           console.log(err);
           this.presentToast(err);
@@ -149,7 +144,6 @@ export class AboutPage {
           let path = imageData;
           let new_path = path.substring(path.indexOf('s'));
           this.localFileName = new_path;
-          this.uploadFile();
         }, (err) => {
           console.log(err);
           this.presentToast(err);
@@ -157,39 +151,46 @@ export class AboutPage {
       }
 
       uploadFile() {
-        const fileTransfer: FileTransferObject = this.transfer.create();
+        this.presentLoadingDefault();
+        this.publicando = true;
+
+        if(this.imageURI != null) {
+          const fileTransfer: FileTransferObject = this.transfer.create();
+          
+          let formattedDate = new Date();
+          let d = formattedDate.getDate();
+          let m = formattedDate.getMonth();
+          m += 1;  // JavaScript months are 0-11
+          let y = formattedDate.getFullYear();
+          let random = Math.floor(Math.random() * 1000000) + 100000;
+          let random2 = Math.floor(Math.random() * 1000000) + 100000;
+          this.imageFileName = d + "_" + m + "_" + y + "_" + random + "_" + random2 + ".jpg";
+
+          let options: FileUploadOptions = {
+            fileKey: 'imagem',
+            fileName: this.imageFileName,
+            chunkedMode: false,
+            mimeType: "image/jpeg",
+            headers: {}
+          }
         
-
-        let formattedDate = new Date();
-        let d = formattedDate.getDate();
-        let m = formattedDate.getMonth();
-        m += 1;  // JavaScript months are 0-11
-        let y = formattedDate.getFullYear();
-        let random = Math.floor(Math.random() * 1000000) + 100000;
-        let random2 = Math.floor(Math.random() * 1000000) + 100000;
-        this.imageFileName = d + "_" + m + "_" + y + "_" + random + "_" + random2 + ".jpg";
-
-        let options: FileUploadOptions = {
-          fileKey: 'imagem',
-          fileName: this.imageFileName,
-          chunkedMode: false,
-          mimeType: "image/jpeg",
-          headers: {}
+          fileTransfer.upload(this.imageURI, encodeURI('https://bluedropsproducts.com/upload.php'), options)
+            .then((data) => {
+            console.log(data+" Uploaded Successfully");
+            this.fileUrl = "https://bluedropsproducts.com/app/uploads/" + this.imageFileName;
+            this.getUserPosition();
+          }, (err) => {
+            console.log(err);
+            this.presentToast(err);
+          });
+        } else {
+          this.getUserPosition();
         }
-      
-        fileTransfer.upload(this.imageURI, encodeURI('https://bluedropsproducts.com/upload.php'), options)
-          .then((data) => {
-          console.log(data+" Uploaded Successfully");
-          this.fileUrl = "https://bluedropsproducts.com/app/uploads/" + this.imageFileName;
-        }, (err) => {
-          console.log(err);
-          this.presentToast(err);
-        });
       }
-      presentToast(msg) {
+      presentToast(msg, time = 3000) {
         let toast = this.toastCtrl.create({
           message: msg,
-          duration: 3000,
+          duration: time,
           position: 'bottom'
         });
       
@@ -202,7 +203,6 @@ export class AboutPage {
 
       getUserPosition() {
         //this.presentLoadingDefault();
-        this.publicando = true;
         this.options = {
           enableHighAccuracy: true
         };
@@ -263,6 +263,7 @@ export class AboutPage {
       .subscribe(data => {
         this.publicando = false;
         //this.presentToast(data.data);
+        this.loading.dismiss();
         console.log(data.data);
         this.navCtrl.push('FeedPage');
       });
@@ -303,7 +304,30 @@ export class AboutPage {
     })
   }
 
+  reset() {
+    this.local_array = null;
+    this.bairro = null;
+    this.cidade = null;
+    this.estado = null;
+    this.pais = null;
+    this.checkin = null;
+    this.userImagem = null;
+    this.usuario = null;
+    this.nome_usuario = null;
+    this.foto_usuario = null;
+    this.publicando = null;
+    this.texto = "";
+    this.imageURI = null;
+    this.imageFileName = null;
+    this.fileUrl = null;
+    this.local = "bairro";
+    this.localFileName = null;
+    this.options = null;
+    this.currentPos = null;
+  }
+
   ionViewDidLoad() {
+    this.reset();
     this.storage.get('meuid').then((val) => {
       console.log('Id', val);
       this.userId = val;
