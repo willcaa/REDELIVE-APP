@@ -125,7 +125,17 @@ export class AboutPage {
           this.presentToast(err);
         });
       }
-
+      loadLocation(lat, long) {
+        let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + long + "&key=AIzaSyDSO6Siell1ljeulEnHXDL4a5pfrCttnTc";
+        this.http.get(url).map(res => res.json()).subscribe(data => {
+          console.log(data);
+          this.bairro = data.results[0].address_components[2].long_name;
+          this.cidade = data.results[0].address_components[3].long_name;
+          this.estado = data.results[0].address_components[5].short_name;
+          this.pais = data.results[0].address_components[6].long_name;
+          this.sendPost(lat, long, this.topOrNews);
+        });
+      }
       pushPage() {
         this.navCtrl.push('FeedPage');
       }
@@ -152,9 +162,10 @@ export class AboutPage {
 
       uploadFile() {
         this.presentLoadingDefault();
+        this.navCtrl.push('FeedPage');
         this.publicando = true;
 
-        if(this.imageURI != "") {
+        if(this.imageURI != null) {
           const fileTransfer: FileTransferObject = this.transfer.create();
           
           let formattedDate = new Date();
@@ -177,7 +188,7 @@ export class AboutPage {
           fileTransfer.upload(this.imageURI, encodeURI('https://bluedropsproducts.com/upload.php'), options)
             .then((data) => {
             console.log(data+" Uploaded Successfully");
-            this.fileUrl = "https://bluedropsproducts.com/app/uploads/" + this.imageFileName;
+            //this.presentToast(data+" Uploaded Successfully");
             this.getUserPosition();
           }, (err) => {
             console.log(err);
@@ -210,16 +221,9 @@ export class AboutPage {
         this.geolocation.getCurrentPosition(this.options).then((pos: Geoposition) => {
     
           this.currentPos = pos;
-          console.log(pos.coords.latitude, pos.coords.longitude);
+          //this.presentToast(pos.coords.latitude + ", ", pos.coords.longitude);
 
-          let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + pos.coords.latitude + "," + pos.coords.longitude + "";
-          this.http.get(url).map(res => res.json()).subscribe(data => {
-            this.bairro = data.results[0].address_components[2].long_name;
-            this.cidade = data.results[0].address_components[3].long_name;
-            this.estado = data.results[0].address_components[5].short_name;
-            this.pais = data.results[0].address_components[6].long_name;
-            this.sendPost(pos.coords.latitude, pos.coords.longitude, this.topOrNews);
-          });
+          this.loadLocation(pos.coords.latitude, pos.coords.longitude);
 
         }, (err: PositionError) => {
           console.log("error : " + err.message);
@@ -229,6 +233,7 @@ export class AboutPage {
 
 
   sendPost(lat, long, tipo) {
+    //this.presentToast(this.pais);
     let headers = new Headers();
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Accept', 'application/json');
@@ -256,16 +261,18 @@ export class AboutPage {
       local: this.checkin
     }
 
-    var link = 'https://bluedropsproducts.com/app/anuncios/criar';
-
+    var link = 'http://18.217.102.194/anuncios/criar';
+    //this.presentToast("antes");
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
       .subscribe(data => {
+        //this.presentToast("depois");
         this.publicando = false;
         //this.presentToast(data.data);
+        this.navCtrl.push('FeedPage');
         this.loading.dismiss();
         console.log(data.data);
-        this.navCtrl.push('FeedPage');
+      
       });
   }
 
@@ -279,7 +286,7 @@ export class AboutPage {
       id_usuario: this.userId
     }
 
-    let link = 'https://bluedropsproducts.com/app/usuarios/getUserInfo';
+    let link = 'http://18.217.102.194/usuarios/getUserInfo';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
     .map(res => res.json())
@@ -305,29 +312,25 @@ export class AboutPage {
   }
 
   reset() {
-    this.local_array = [];
-    this.bairro = "";
-    this.cidade = "";
-    this.estado = "";
-    this.pais = "";
+    this.local_array = null;
+    this.bairro = null;
+    this.cidade = null;
+    this.estado = null;
+    this.pais = null;
     this.checkin = null;
-    this.local_array1 = "";
-    this.local_array2 = "";
-    this.local_array3 = "";
-    this.local_array4 = "";
-    this.local_array5 = "";
     this.userImagem = null;
-    this.nome_usuario = "";
-    this.foto_usuario = "";
-    this.topOrNews = 'Top';
-    this.publicando = false;
-    this.userId = 0;
+    this.usuario = null;
+    this.nome_usuario = null;
+    this.foto_usuario = null;
+    this.publicando = null;
     this.texto = "";
-    this.imageURI = "";
-    this.imageFileName = "";
-    this.fileUrl = "";
+    this.imageURI = null;
+    this.imageFileName = null;
+    this.fileUrl = null;
     this.local = "bairro";
-    this.localFileName = "";
+    this.localFileName = null;
+    this.options = null;
+    this.currentPos = null;
   }
 
   ionViewDidLoad() {

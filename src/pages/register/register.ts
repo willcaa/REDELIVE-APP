@@ -53,10 +53,14 @@ export class RegisterPage {
       headerx.append('Access-Control-Allow-Origin', '*');
       headerx.append('Accept', 'application/json');
       headerx.append('content-type', 'application/json');
-      var myData = JSON.stringify({email: email, nome: nome, imagem: imagem});
-      var link = 'https://bluedropsproducts.com/app/usuarios/cadastrar';
+      var body = {
+        email: email,
+        nome: nome,
+        imagem: imagem
+      }
+      var link = 'http://18.217.102.194/usuarios/cadastrar';
   
-      this.http.post(link, myData, { headers: headerx })
+      this.http.post(link, body, { headers: headerx })
         .map(res => res.json())
         .subscribe(data => {
           console.log(data.id);

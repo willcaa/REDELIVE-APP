@@ -83,7 +83,7 @@ export class FeedPage {
       id_usuario: this.userId,
     }
 
-    var link = 'https://bluedropsproducts.com/app/usuarios/notificacoes_qtd';
+    var link = 'http://18.217.102.194/usuarios/notificacoes_qtd';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -105,7 +105,7 @@ export class FeedPage {
       n_estrelas: stars
     }
 
-    var link = 'https://bluedropsproducts.com/app/anuncios/stars';
+    var link = 'http://18.217.102.194/anuncios/stars';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -145,7 +145,7 @@ export class FeedPage {
                 id_usuario: this.userId,
                 id_anuncio: post.id_anuncio
               }
-              var link = 'https://bluedropsproducts.com/app/post/denunciar';
+              var link = 'http://18.217.102.194/post/denunciar';
 
               this.http.post(link, JSON.stringify(body), { headers: headers })
               .map(res => res.json())
@@ -192,7 +192,7 @@ export class FeedPage {
           id_usuario: this.userId,
           id_anuncio: post.id
         }
-        var link = 'https://bluedropsproducts.com/app/anuncios/denunciarAnuncio';
+        var link = 'http://18.217.102.194/anuncios/denunciarAnuncio';
 
         this.http.post(link, JSON.stringify(body), { headers: headers })
         .map(res => res.json())
@@ -228,7 +228,7 @@ export class FeedPage {
       let body = {
         id_usuario: this.userId,
       }
-      var link = 'https://bluedropsproducts.com/app/usuarios/limparNotificacoes';
+      var link = 'http://18.217.102.194/usuarios/limparNotificacoes';
 
       this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -255,7 +255,7 @@ export class FeedPage {
     let body = {
       id_usuario: this.userId
     }
-    var link = 'https://bluedropsproducts.com/app/anuncios/seguidores';
+    var link = 'http://18.217.102.194/anuncios/seguidores';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -362,7 +362,7 @@ export class FeedPage {
               id_anuncio: post.id_anuncio,
             }
 
-            let link = 'https://bluedropsproducts.com/app/anuncios/deletar';
+            let link = 'http://18.217.102.194/anuncios/deletar';
 
             this.http.post(link, JSON.stringify(body), { headers: headers })
             .map(res => res.json())
@@ -422,7 +422,7 @@ export class FeedPage {
         anuncio: postId,
         liker: this.userId
       }
-      var link = 'https://bluedropsproducts.com/app/likes/top';
+      var link = 'http://18.217.102.194/likes/top';
 
       this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -452,7 +452,7 @@ export class FeedPage {
     //   anuncio: postId,
     //   liker: this.userId
     // }
-    // var link = 'https://bluedropsproducts.com/app/likes/top';
+    // var link = 'http://18.217.102.194/likes/top';
 
     // this.http.post(link, JSON.stringify(body), { headers: headers })
     //   // .map(res => res.json())
@@ -521,7 +521,7 @@ export class FeedPage {
       long: long,
       tipo: tipo
     }
-    var link = 'https://bluedropsproducts.com/app/anuncios/puxarTodos';
+    var link = 'http://18.217.102.194/anuncios/puxarTodos';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -716,7 +716,7 @@ export class FeedPage {
       tipo: tipo,
       usuario: this.userId
     }
-    var link = 'https://bluedropsproducts.com/app/anuncios/criar';
+    var link = 'http://18.217.102.194/anuncios/criar';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())

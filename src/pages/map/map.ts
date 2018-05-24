@@ -49,7 +49,7 @@ export class MapPage {
       lat: lat,
       long: long
     }
-    var link = 'https://bluedropsproducts.com/app/anuncios/puxarTodasFotos';
+    var link = 'http://18.217.102.194/anuncios/puxarTodasFotos';
 
     this.http.post(link, JSON.stringify(body), { headers: header })
       .map(res => res.json())

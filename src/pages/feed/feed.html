@@ -38,19 +38,19 @@
         <img *ngIf="local != 'proximidade'" src="assets/imgs/local_round_black.png" style="height: 24px; margin-top: 5px;">
       </ion-segment-button>
       <ion-segment-button value="amigos" (ionSelect)="alterarLocal('amigos')">
-        <ion-icon name="contacts" style="padding-top: 10px;"></ion-icon>
+        <ion-icon name="contacts" style="padding-top: 4px;"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="bairro" (ionSelect)="alterarLocal('bairro')">
-        <p>Bairro</p>
+        <p style="margin-top: 6px;">Bairro</p>
       </ion-segment-button>
       <ion-segment-button value="cidade" (ionSelect)="alterarLocal('cidade')">
-        <p>Cidade</p>
+        <p style="margin-top: 6px;">Cidade</p>
       </ion-segment-button>
       <ion-segment-button value="estado" (ionSelect)="alterarLocal('estado')">
-        <p>Estado</p>
+        <p style="margin-top: 6px;">Estado</p>
       </ion-segment-button>
       <ion-segment-button value="pais" (ionSelect)="alterarLocal('pais')">
-        <p>País</p>
+        <p style="margin-top: 6px;">País</p>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
