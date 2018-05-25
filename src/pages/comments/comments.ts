@@ -35,7 +35,7 @@ export class CommentsPage {
     let body = {
       anuncio: this.post
     }
-    var link = 'https://bluedropsproducts.com/app/comments/puxarComentario';
+    var link = 'http://18.217.102.194/app/comments/puxarComentario';
     
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -71,7 +71,7 @@ export class CommentsPage {
               commentId: comment.id,
             }
 
-            let link = 'https://bluedropsproducts.com/app/comments/deletarComentario';
+            let link = 'http://18.217.102.194/app/comments/deletarComentario';
 
             this.http.post(link, JSON.stringify(body), { headers: headers })
             .map(res => res.json())
@@ -98,7 +98,7 @@ export class CommentsPage {
       commUser: this.id_usuario,
       comments: this.texto
     }
-    var link = 'https://bluedropsproducts.com/app/comments/salvarComentario';
+    var link = 'http://18.217.102.194/app/comments/salvarComentario';
     
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())

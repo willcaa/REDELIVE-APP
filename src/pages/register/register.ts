@@ -54,7 +54,7 @@ export class RegisterPage {
       headerx.append('Accept', 'application/json');
       headerx.append('content-type', 'application/json');
       var myData = JSON.stringify({email: email, nome: nome, imagem: imagem});
-      var link = 'https://bluedropsproducts.com/app/usuarios/cadastrar';
+      var link = 'http://18.217.102.194/app/usuarios/cadastrar';
   
       this.http.post(link, myData, { headers: headerx })
         .map(res => res.json())
@@ -98,6 +98,7 @@ export class RegisterPage {
       .then( res => this.isLoggedIn = false)
       .catch(e => console.log('Error logout from Facebook', e));
   }
+
 
   getUserDetail(userid) {
     this.fb.api("/"+userid+"/?fields=picture.width(9999).height(9999),id,email,name,gender",["public_profile"])
