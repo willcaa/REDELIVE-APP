@@ -33,7 +33,7 @@ export class PopoverNotificacoesComponent {
     let body = {
       id_usuario: this.userId
     }
-    var link = 'http://18.217.102.194/usuarios/notificacoes';
+    var link = 'https://bluedropsproducts.com/app/usuarios/notificacoes';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())

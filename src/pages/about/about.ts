@@ -162,7 +162,6 @@ export class AboutPage {
 
       uploadFile() {
         this.presentLoadingDefault();
-        this.navCtrl.push('FeedPage');
         this.publicando = true;
 
         if(this.imageURI != null) {
@@ -188,7 +187,7 @@ export class AboutPage {
           fileTransfer.upload(this.imageURI, encodeURI('https://bluedropsproducts.com/upload.php'), options)
             .then((data) => {
             console.log(data+" Uploaded Successfully");
-            //this.presentToast(data+" Uploaded Successfully");
+            this.presentToast(data+" Uploaded Successfully");
             this.getUserPosition();
           }, (err) => {
             console.log(err);
@@ -213,6 +212,7 @@ export class AboutPage {
       }
 
       getUserPosition() {
+
         //this.presentLoadingDefault();
         this.options = {
           enableHighAccuracy: true
@@ -221,7 +221,7 @@ export class AboutPage {
         this.geolocation.getCurrentPosition(this.options).then((pos: Geoposition) => {
     
           this.currentPos = pos;
-          //this.presentToast(pos.coords.latitude + ", ", pos.coords.longitude);
+          this.presentToast(pos.coords.latitude + ", ", pos.coords.longitude);
 
           this.loadLocation(pos.coords.latitude, pos.coords.longitude);
 
@@ -233,7 +233,7 @@ export class AboutPage {
 
 
   sendPost(lat, long, tipo) {
-    //this.presentToast(this.pais);
+    this.presentToast(this.pais);
     let headers = new Headers();
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Accept', 'application/json');
@@ -261,18 +261,17 @@ export class AboutPage {
       local: this.checkin
     }
 
-    var link = 'http://18.217.102.194/anuncios/criar';
-    //this.presentToast("antes");
+    var link = 'https://bluedropsproducts.com/app/anuncios/criar';
+    this.presentToast("antes");
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
       .subscribe(data => {
-        //this.presentToast("depois");
+        this.presentToast("depois");
         this.publicando = false;
         //this.presentToast(data.data);
-        this.navCtrl.push('FeedPage');
         this.loading.dismiss();
         console.log(data.data);
-      
+        this.navCtrl.push('FeedPage');
       });
   }
 
@@ -286,7 +285,7 @@ export class AboutPage {
       id_usuario: this.userId
     }
 
-    let link = 'http://18.217.102.194/usuarios/getUserInfo';
+    let link = 'https://bluedropsproducts.com/app/usuarios/getUserInfo';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
     .map(res => res.json())

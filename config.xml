@@ -36,18 +36,18 @@
         <icon density="xhdpi" src="resources/android/icon/icone.png" />
         <icon density="xxhdpi" src="resources/android/icon/icone.png" />
         <icon density="xxxhdpi" src="resources/android/icon/icone.png" />
-        <splash density="land-ldpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="land-mdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="land-hdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="land-xhdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="land-xxhdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="land-xxxhdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="port-ldpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="port-mdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="port-hdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="port-xhdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="port-xxhdpi" src="resources/android/splash/fundo.jpg" />
-        <splash density="port-xxxhdpi" src="resources/android/splash/fundo.jpg" />
+        <splash density="land-ldpi" src="resources/android/splash/fundo.png" />
+        <splash density="land-mdpi" src="resources/android/splash/fundo.png" />
+        <splash density="land-hdpi" src="resources/android/splash/fundo.png" />
+        <splash density="land-xhdpi" src="resources/android/splash/fundo.png" />
+        <splash density="land-xxhdpi" src="resources/android/splash/fundo.png" />
+        <splash density="land-xxxhdpi" src="resources/android/splash/fundo.png" />
+        <splash density="port-ldpi" src="resources/android/splash/fundo.png" />
+        <splash density="port-mdpi" src="resources/android/splash/fundo.png" />
+        <splash density="port-hdpi" src="resources/android/splash/fundo.png" />
+        <splash density="port-xhdpi" src="resources/android/splash/fundo.png" />
+        <splash density="port-xxhdpi" src="resources/android/splash/fundo.png" />
+        <splash density="port-xxxhdpi" src="resources/android/splash/fundo.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

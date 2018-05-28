@@ -70,7 +70,7 @@ export class PerfilPage {
      //   anuncio: postId,
      //   liker: this.userId
      // }
-     // var link = 'http://18.217.102.194/likes/top';
+     // var link = 'https://bluedropsproducts.com/app/likes/top';
  
      // this.http.post(link, JSON.stringify(body), { headers: headers })
      //   // .map(res => res.json())
@@ -91,7 +91,7 @@ export class PerfilPage {
       id_perfil: this.perfilId
     }
 
-    let link = 'http://18.217.102.194/usuarios/perfil';
+    let link = 'https://bluedropsproducts.com/app/usuarios/perfil';
     
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -121,7 +121,7 @@ export class PerfilPage {
         id_usuario: this.perfilId
       }
 
-      let link = 'http://18.217.102.194/usuarios/getStats';
+      let link = 'https://bluedropsproducts.com/app/usuarios/getStats';
 
       this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -147,7 +147,7 @@ export class PerfilPage {
         id_usuario: id_usuario
       }
 
-      let link = 'http://18.217.102.194/usuarios/DeixarSeguir';
+      let link = 'https://bluedropsproducts.com/app/usuarios/DeixarSeguir';
 
       this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -167,7 +167,7 @@ export class PerfilPage {
         id_usuario: id_usuario
       }
 
-      let link = 'http://18.217.102.194/usuarios/seguir';
+      let link = 'https://bluedropsproducts.com/app/usuarios/seguir';
 
       this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -192,7 +192,7 @@ export class PerfilPage {
         id_usuario: id_usuario
       }
 
-      let link = 'http://18.217.102.194/usuarios/checkSeguidor';
+      let link = 'https://bluedropsproducts.com/app/usuarios/checkSeguidor';
 
       this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -203,7 +203,7 @@ export class PerfilPage {
   }
 
   ampliarImagem(imagem, texto = "") {
-    this.photoViewer.show('http://18.217.102.194/uploads/'+imagem,texto,{share:true});
+    this.photoViewer.show('https://bluedropsproducts.com/app/uploads/'+imagem,texto,{share:true});
   }
 
   getImage(image) {
@@ -236,7 +236,7 @@ export class PerfilPage {
               id_anuncio: post.id_anuncio,
             }
 
-            let link = 'http://18.217.102.194/anuncios/deletar';
+            let link = 'https://bluedropsproducts.com/app/anuncios/deletar';
 
             this.http.post(link, JSON.stringify(body), { headers: headers })
             .map(res => res.json())

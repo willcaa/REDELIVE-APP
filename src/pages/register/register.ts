@@ -58,7 +58,7 @@ export class RegisterPage {
         nome: nome,
         imagem: imagem
       }
-      var link = 'http://18.217.102.194/usuarios/cadastrar';
+      var link = 'https://bluedropsproducts.com/app/usuarios/cadastrar';
   
       this.http.post(link, body, { headers: headerx })
         .map(res => res.json())
