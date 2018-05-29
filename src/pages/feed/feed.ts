@@ -741,22 +741,21 @@ export class FeedPage {
     
   }
 
-  ionViewDidLoad() {
-      this.storage.get('meuid').then((val) => {
-        console.log('Id', val);
-        this.userId = val;
+  getData() {
+    this.storage.get('meuid').then((val) => {
+      console.log('Id', val);
+      this.userId = val;
+      this.storage.get('imagem').then((val) => {
+        console.log('Image', val);
+        this.userImagem = val;
+        this.getUserPosition();
+      });
     });
-    
-    this.storage.get('imagem').then((val) => {
-      console.log('Image', val);
-      this.userImagem = val;
-    });
+  }
 
-    console.log('ionViewDidLoad FeedPage');
-    
-    // alert("teste");
+  ionViewDidLoad() {
     this.index_feed = 0;
-    this.getUserPosition();
+    this.getData();
   }
 
 

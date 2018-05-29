@@ -65,24 +65,27 @@ export class RegisterPage {
         .subscribe(data => {
           console.log(data.id);
           if ( data ) {
-            this.storage.set('nome', data.nome);
-            this.storage.set('email', data.email);
-            this.storage.set('imagem', data.user_image);
-            this.storage.set('meuid', data.id);
-            this.storage.get('meuid').then((val) => {
-              console.log('Id', val);
-              this.loginId = val;
-            });
-             
-            console.log("logado");
-            this.navCtrl.push('FeedPage');
-              
+            this.setStorage(data);
           };
           console.log(data);
         });
     }
   }
 
+  setStorage(data) {
+    this.storage.set('nome', data.nome);
+    this.storage.set('email', data.email);
+    this.storage.set('imagem', data.user_image);
+    this.storage.set('meuid', data.id);
+    this.storage.get('meuid').then((val) => {
+      this.loginId = val;
+      this.goFeed();
+    });
+  }
+
+  goFeed() {
+    this.navCtrl.push('FeedPage');
+  }
 
   login() {
     this.fb.login(['public_profile', 'user_friends', 'email'])
