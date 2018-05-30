@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, LoadingController, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, NavParams,ToastController, Content } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Facebook } from '@ionic-native/facebook';
@@ -23,7 +23,7 @@ export class RegisterPage {
   start: string;
   data:any = {};
   loginId: number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController, private fb: Facebook, private storage: Storage) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController, private fb: Facebook, private storage: Storage) {
     this.http = http;
     this.start = "";
     this.destination = "";
@@ -39,7 +39,7 @@ export class RegisterPage {
     .catch(e => console.log(e));
   }
 
-  cadastrar(email, nome, imagem) {
+  cadastrar(email = this.users.email, nome = this.users.name, imagem = this.users.picture.data.url) {
   
     this.storage.get('meuid').then((val) => {
       console.log('Id', val);
@@ -54,7 +54,7 @@ export class RegisterPage {
       headerx.append('Accept', 'application/json');
       headerx.append('content-type', 'application/json');
       var myData = JSON.stringify({email: email, nome: nome, imagem: imagem});
-      var link = 'http://18.217.102.194/app/usuarios/cadastrar';
+      var link = 'https://bluedropsproducts.com/app/usuarios/cadastrar';
   
       this.http.post(link, myData, { headers: headerx })
         .map(res => res.json())
@@ -79,6 +79,19 @@ export class RegisterPage {
     }
   }
 
+  presentToast(msg, time = 3000) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: time,
+      position: 'bottom'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
+  }
 
   login() {
     this.fb.login(['public_profile', 'user_friends', 'email'])
@@ -104,7 +117,7 @@ export class RegisterPage {
     this.fb.api("/"+userid+"/?fields=picture.width(9999).height(9999),id,email,name,gender",["public_profile"])
       .then(res => {
         this.users = res;
-        this.cadastrar(this.users.email, this.users.name, this.users.picture.data.url);
+        this.cadastrar();
       })
       .catch(e => {
         console.log(e);

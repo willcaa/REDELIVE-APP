@@ -174,10 +174,10 @@ export class AboutPage {
             headers: {}
           }
         
-          fileTransfer.upload(this.imageURI, encodeURI('http://18.217.102.194/upload.php'), options)
+          fileTransfer.upload(this.imageURI, encodeURI('https://bluedropsproducts.com/app/upload.php'), options)
             .then((data) => {
             console.log(data+" Uploaded Successfully");
-            this.fileUrl = "http://18.217.102.194/app/uploads/" + this.imageFileName;
+            this.fileUrl = "https://bluedropsproducts.com/app/uploads/" + this.imageFileName;
             this.getUserPosition();
           }, (err) => {
             console.log(err);
@@ -256,7 +256,7 @@ export class AboutPage {
       local: this.checkin
     }
 
-    var link = 'http://18.217.102.194/app/anuncios/criar';
+    var link = 'https://bluedropsproducts.com/app/anuncios/criar';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
       .map(res => res.json())
@@ -279,7 +279,7 @@ export class AboutPage {
       id_usuario: this.userId
     }
 
-    let link = 'http://18.217.102.194/app/usuarios/getUserInfo';
+    let link = 'https://bluedropsproducts.com/app/usuarios/getUserInfo';
 
     this.http.post(link, JSON.stringify(body), { headers: headers })
     .map(res => res.json())

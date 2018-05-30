@@ -21,8 +21,26 @@ export class MyApp {
       // screen.lock(screen.ORIENTATIONS.PORTRAIT);
       storage.get('meuid').then((val) => {
         if(val) {
-          this.rootPage = FeedPage;
-        } else {
+          storage.get('imagem').then((val) => {
+            if(val) {
+              storage.get('email').then((val) => {
+                if(val) {
+                  storage.get('nome').then((val) => {
+                    if(val) {
+                      this.rootPage = FeedPage;
+                    } else {
+                      this.rootPage = RegisterPage;
+                    } 
+                  });
+                } else {
+                  this.rootPage = RegisterPage;
+                } 
+              });
+            } else {
+              this.rootPage = RegisterPage;
+            } 
+          });
+        } else { 
           this.rootPage = RegisterPage;
         }
       });
