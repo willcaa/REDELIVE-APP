@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, LoadingController, NavController, NavParams, Content } from 'ionic-angular';
+import { IonicPage, LoadingController, NavController, ToastController, NavParams, Content } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Facebook } from '@ionic-native/facebook';
@@ -23,7 +23,7 @@ export class RegisterPage {
   start: string;
   data:any = {};
   loginId: number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController, private fb: Facebook, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, private fb: Facebook, private storage: Storage) {
     this.http = http;
     this.start = "";
     this.destination = "";
@@ -63,7 +63,12 @@ export class RegisterPage {
       this.http.post(link, body, { headers: headerx })
         .map(res => res.json())
         .subscribe(data => {
-          console.log(data.id);
+          let toast = this.toastCtrl.create({
+            message: data,
+            duration: 3000,
+            position: 'top'
+          });
+          toast.present();
           if ( data ) {
             this.setStorage(data);
           };
@@ -77,14 +82,13 @@ export class RegisterPage {
     this.storage.set('email', data.email);
     this.storage.set('imagem', data.user_image);
     this.storage.set('meuid', data.id);
-    this.storage.get('meuid').then((val) => {
-      this.loginId = val;
-      this.goFeed();
-    });
+    this.goFeed(data.id);
   }
 
-  goFeed() {
-    this.navCtrl.push('FeedPage');
+  goFeed(id) {
+    this.navCtrl.push('FeedPage',{
+      id: id
+    });
   }
 
   login() {

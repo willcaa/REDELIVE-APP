@@ -59,6 +59,8 @@ export class FeedPage {
   loginId: number;
   userId: any;
   userImagem: any;
+  userName: any;
+  usuario: any;
   public local: any = "proximidade";
   public range: any;
   public notificacoes_qts: any;
@@ -555,8 +557,10 @@ export class FeedPage {
         } else {
           if (!data.status) {
             this.feed = this.feed;
+            infiniteScroll.complete();
           } else {
             this.feed = data.data;
+            infiniteScroll.complete();
           }
         }
         console.log(data.data);
@@ -569,7 +573,7 @@ export class FeedPage {
 
   goPerfil(id_perfil = this.userId) {
     this.navCtrl.push(PerfilPage, {
-      perfilId: id_perfil, userId: this.userId
+      perfilId: id_perfil, userId: this.userId, image: this.userImagem, nome: this.userName
   });
   }
 
@@ -742,20 +746,48 @@ export class FeedPage {
   }
 
   getData() {
-    this.storage.get('meuid').then((val) => {
-      console.log('Id', val);
-      this.userId = val;
-      this.storage.get('imagem').then((val) => {
-        console.log('Image', val);
-        this.userImagem = val;
-        this.getUserPosition();
-      });
+    let headers = new Headers();
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Accept', 'application/json');
+    headers.append('content-type', 'application/json');
+
+    let body = {
+      id_usuario: this.userId
+    }
+
+    let link = 'https://bluedropsproducts.com/app/usuarios/getUserInfo';
+
+    this.http.post(link, JSON.stringify(body), { headers: headers })
+    .map(res => res.json())
+    .subscribe(data => {
+      this.usuario = data['usuario'];
+      this.userName = this.usuario.nome;
+      this.userImagem = this.usuario.user_image;
+      this.setStorage();
     });
+  }
+
+  setStorage() {
+    this.storage.set('nome', this.userName);
+    this.storage.set('imagem', this.userImagem);
+    this.storage.set('meuid', this.userId);
+    this.getUserPosition();
   }
 
   ionViewDidLoad() {
     this.index_feed = 0;
-    this.getData();
+    this.userId = this.navParams.get("id");
+    this.storage.get('meuid').then((val) => {
+      this.userId = val;
+    });
+    this.storage.get('imagem').then((val) => {
+      this.userImagem = val;
+    });
+    if(this.userId & this.userImagem) {
+      this.getUserPosition();
+    } else {
+      this.getData();
+    }
   }
 
 

@@ -42,6 +42,8 @@ export class PerfilPage {
   ionViewDidLoad() {
     this.perfilId = this.navParams.get("perfilId");
     this.userId = this.navParams.get("userId");
+    this.perfil_imagem = this.navParams.get("image");
+    this.perfil_nome = this.navParams.get("nome");
     this.enviandoSeguir = false;
     this.checkSeguir(this.perfilId, this.userId);
     this.getStats();
@@ -98,8 +100,8 @@ export class PerfilPage {
       .subscribe(data => {
         this.anuncios = data['anuncios'];
         this.usuario = data['usuario'];
-        this.perfil_nome = this.anuncios[0]['nome'];
-        this.perfil_imagem = this.anuncios[0]['user_image'];
+        //this.perfil_nome = this.anuncios[0]['nome'];
+        //this.perfil_imagem = this.anuncios[0]['user_image'];
         this.usuario_imagem = this.usuario['user_image'];
       });
   }
