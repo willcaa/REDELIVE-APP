@@ -63,12 +63,6 @@ export class RegisterPage {
       this.http.post(link, body, { headers: headerx })
         .map(res => res.json())
         .subscribe(data => {
-          let toast = this.toastCtrl.create({
-            message: data,
-            duration: 3000,
-            position: 'top'
-          });
-          toast.present();
           if ( data ) {
             this.setStorage(data);
           };
