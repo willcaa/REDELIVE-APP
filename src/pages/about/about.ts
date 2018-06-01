@@ -163,7 +163,7 @@ export class AboutPage {
 
       uploadFile() {
         this.presentLoadingDefault();
-        this.navCtrl.push('FeedPage');
+        this.navCtrl.push('FeedPage', { id: this.userId});
         this.publicando = true;
 
         if(this.imageURI != null) {
@@ -269,7 +269,7 @@ export class AboutPage {
         //this.presentToast("depois");
         this.publicando = false;
         //this.presentToast(data.data);
-        this.navCtrl.push('FeedPage');
+        this.navCtrl.push('FeedPage', { id: this.userId});
         this.loading.dismiss();
         console.log(data.data);
       
@@ -333,20 +333,14 @@ export class AboutPage {
     this.storage.get('meuid').then((val) => {
       console.log('Id', val);
       this.userId = val;
-      this.hasID = true;
+      this.getUserInfo();
     });
   }
 
   ionViewDidLoad() {
     this.reset();
     this.publicando = false;
-    let onWhile = true;
-    while(onWhile) {
-      if(this.hasID) {
-        this.getUserInfo();
-        onWhile = false;
-      }
-    }
+    this.getID();
   }
 
 }
