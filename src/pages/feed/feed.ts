@@ -279,15 +279,19 @@ export class FeedPage {
           break;
         case 400:
           this.local = "bairro";
+          this.topOrNews = "Top";
           break;
         case 600:
           this.local = "cidade";
+          this.topOrNews = "Top";
           break;
         case 800:
           this.local = "estado";
+          this.topOrNews = "Top";
           break;
         case 1000:
           this.local = "pais";
+          this.topOrNews = "Top";
           break;
       }
     } else {

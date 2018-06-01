@@ -340,7 +340,13 @@ export class AboutPage {
   ionViewDidLoad() {
     this.reset();
     this.publicando = false;
-    this.getUserInfo();
+    let onWhile = true;
+    while(onWhile) {
+      if(this.hasID) {
+        this.getUserInfo();
+        onWhile = false;
+      }
+    }
   }
 
 }
