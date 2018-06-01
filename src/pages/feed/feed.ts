@@ -316,6 +316,9 @@ export class FeedPage {
           break;
       }
     }
+    this.limparFeed();
+  }
+  limparFeed() {
     this.index_feed = 0;
     this.feed = [];
     this.getUserPosition();
@@ -778,20 +781,29 @@ export class FeedPage {
     this.getUserPosition();
   }
 
-  ionViewDidLoad() {
-    this.index_feed = 0;
-    this.userId = this.navParams.get("id");
+  getId() {
     this.storage.get('meuid').then((val) => {
       this.userId = val;
+      this.getImage();
     });
+  }
+
+  getImage() {
     this.storage.get('imagem').then((val) => {
       this.userImagem = val;
-    });
-    if(this.userId & this.userImagem) {
       this.getUserPosition();
-    } else {
-      this.getData();
-    }
+    });
+  }
+
+  ionViewDidLoad() {
+    this.index_feed = 0;
+    this.getId();
+    // this.userId = this.navParams.get("id");
+    // if(this.userId & this.userImagem) {
+    //   this.getUserPosition();
+    // } else {
+    //   this.getData();
+    // }
   }
 
 
