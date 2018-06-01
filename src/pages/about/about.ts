@@ -39,6 +39,7 @@ export class AboutPage {
   fileUrl:any;
   local: any = "bairro";
   localFileName:any;
+  hasID: any = false;
   options: GeolocationOptions;
   currentPos: Geoposition;
   loading: any;
@@ -317,10 +318,6 @@ export class AboutPage {
     this.estado = null;
     this.pais = null;
     this.checkin = null;
-    this.userImagem = null;
-    this.usuario = null;
-    this.nome_usuario = null;
-    this.foto_usuario = null;
     this.publicando = null;
     this.texto = "";
     this.imageURI = null;
@@ -332,14 +329,18 @@ export class AboutPage {
     this.currentPos = null;
   }
 
-  ionViewDidLoad() {
-    this.reset();
+  getID() {
     this.storage.get('meuid').then((val) => {
       console.log('Id', val);
       this.userId = val;
-      this.publicando = false;
-      this.getUserInfo();
+      this.hasID = true;
     });
+  }
+
+  ionViewDidLoad() {
+    this.reset();
+    this.publicando = false;
+    this.getUserInfo();
   }
 
 }
