@@ -475,13 +475,11 @@ export class FeedPage {
     // headers.append('Access-Control-Allow-Origin', '*');
     // headers.append('Accept', 'application/json');
     // headers.append('content-type', 'application/json');
-
     // let body = {
     //   anuncio: postId,
     //   liker: this.userId
     // }
     // var link = 'https://bluedropsproducts.com/app/likes/top';
-
     // this.http.post(link, JSON.stringify(body), { headers: headers })
     //   // .map(res => res.json())
     //   .subscribe(data => {
@@ -511,7 +509,7 @@ export class FeedPage {
     headers.append('content-type', 'application/json');
     headers.append('Access-Control-Expose-Headers', "true"); 
 
-    console.log(this.userId, this.userImagem);
+    console.log(this.userId.value, this.userImagem.value);
     this.userId = parseInt(this.userId);
     console.log(this.userId, this.userImagem);
     let tipo:number;
@@ -583,10 +581,14 @@ export class FeedPage {
         } else {
           if (!data.status) {
             this.feed = this.feed;
-            infiniteScroll.complete();
+            if(infiniteScroll) {
+              infiniteScroll.complete();
+            }
           } else {
             this.feed = data.data;
-            infiniteScroll.complete();
+            if(infiniteScroll) {
+              infiniteScroll.complete();
+            }
           }
         }
         console.log(data.data);
@@ -606,20 +608,19 @@ export class FeedPage {
   scrollingFun(e) {
     if (e.scrollTop > 1) {
 
-      document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '120px';
-      document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '120px';
+      document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '100px';
+      document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '100px';
       document.querySelector("#sendbar")['style'].display = 'none';
 
     } 
     if(e.deltaY < 0) {
 
-      document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '165px';
-      document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '165px';
+      document.getElementsByClassName("scroll-content")[1]['style'].marginTop = '145px';
+      document.getElementsByClassName("scroll-content")[0]['style'].marginTop = '145px';
       document.querySelector("#sendbar")['style'].display = 'flex';
 
     }//if 
   }//scrollingFun
-
   goMap(lat, lng, img, user) {
     console.log(img, user);
     let data = {
@@ -643,7 +644,6 @@ export class FeedPage {
       this.currentPos = pos;
       console.log(pos.coords.latitude, pos.coords.longitude);
       // this.getGeocode(pos.coords.latitude, pos.coords.longitude);
-
       let url2 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + pos.coords.latitude + "," + pos.coords.longitude + "&rankby=distance&key=AIzaSyDSO6Siell1ljeulEnHXDL4a5pfrCttnTc";
       this.http.get(url2).map(res => res.json()).subscribe(data2 => {
         this.local_array1 = data2.results[0].name;
@@ -727,10 +727,6 @@ export class FeedPage {
       this.pais = data.results[0].address_components[6].long_name;
     });
 
-    this.storage.get('meuid').then((val) => {
-      console.log('Id', val);
-      this.userId = val;
-    });
   
     let body = {
       local: local,
@@ -797,29 +793,14 @@ export class FeedPage {
     this.getUserPosition();
   }
 
-  getId() {
-    this.storage.get('meuid').then((val) => {
-      this.userId = val;
-      this.getImage();
-    });
-  }
 
-  getImage() {
-    this.storage.get('imagem').then((val) => {
-      this.userImagem = val;
-      this.getUserPosition();
-    });
-  }
+
 
   ionViewDidLoad() {
     this.index_feed = 0;
-    this.getId();
-    // this.userId = this.navParams.get("id");
-    // if(this.userId & this.userImagem) {
-    //   this.getUserPosition();
-    // } else {
-    //   this.getData();
-    // }
+    if(this.userId & this.userImagem) {
+      this.getUserPosition();
+    } 
   }
 
 
