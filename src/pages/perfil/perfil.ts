@@ -252,9 +252,9 @@ export class PerfilPage {
     confirm.present();
   }
   
-  loadMore(infiniteScroll = null) {
-    this.index_anuncio = this.index_anuncio + 1;
-  }
+  // loadMore(infiniteScroll = null) {
+  //   this.index_anuncio = this.index_anuncio + 1;
+  // }
 
   showAlert(title, text, button) {
     let alert = this.alertCtrl.create({ title: title, subTitle: text, buttons: [button] });

@@ -27,7 +27,7 @@ export class MyApp {
                 if(val) {
                   storage.get('nome').then((val) => {
                     if(val) {
-                      this.rootPage = FeedPage;
+                      this.rootPage = RegisterPage;
                     } else {
                       this.rootPage = RegisterPage;
                     } 
