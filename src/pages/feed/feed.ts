@@ -75,6 +75,7 @@ export class FeedPage {
     this.userId = this.get('meuid');
     this.userImagem = this.get('imagem');
     this.userName = this.get('nome');
+    
   }
 
   public update(key: string, data: string) {
@@ -426,6 +427,7 @@ export class FeedPage {
     this.geolocation.getCurrentPosition(this.options).then((pos: Geoposition) => {
 
       this.currentPos = pos;
+      
       this.loadLocation(pos.coords.latitude, pos.coords.longitude, infiniteScroll);
       console.log(pos.coords.latitude, pos.coords.longitude);
 
@@ -508,8 +510,17 @@ export class FeedPage {
     headers.append('Accept', 'application/json');
     headers.append('content-type', 'application/json');
     headers.append('Access-Control-Expose-Headers', "true"); 
+    if(this.userId.__zone_symbol__value) {
+      this.userId = this.userId.__zone_symbol__value;
+    }
+    if(this.userImagem.__zone_symbol__value) {
+      this.userImagem = this.userImagem.__zone_symbol__value;
+    }
+    if(this.userName.__zone_symbol__value) {
+      this.userName = this.userName.__zone_symbol__value;
+    }
 
-    console.log(this.userId.value, this.userImagem.value);
+    console.log(this.userId, this.userImagem);
     this.userId = parseInt(this.userId);
     console.log(this.userId, this.userImagem);
     let tipo:number;
@@ -591,7 +602,7 @@ export class FeedPage {
             }
           }
         }
-        console.log(data.data);
+        console.log(data);
       });
   }
 
@@ -798,9 +809,7 @@ export class FeedPage {
 
   ionViewDidLoad() {
     this.index_feed = 0;
-    if(this.userId & this.userImagem) {
-      this.getUserPosition();
-    } 
+    this.getUserPosition();
   }
 
 
