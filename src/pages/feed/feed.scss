@@ -102,7 +102,7 @@ page-feed {
   }
   .item-range-range {
     height: 24px;
-    background: linear-gradient(0deg, #fff 50%, #e9eaee 50%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 50%, #e9eaee 50%);
     min-height: 0px;
     padding-left: 0px;
     padding-right: 0px;
@@ -238,4 +238,23 @@ page-feed {
   .item-md ion-avatar{
     margin: 0 16px 0 0 !important;
   }
+  .buttons_header{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .segment-button img{
+    width: 60%;
+    height: auto;
+    margin-top: 5px;
+    text-align: center;
+
+  }
+  .range-range .range-slider{
+    margin-top: -10px !important;
+    height: 26px; 
+  }
+  .item-range-range{
+    height: 12px;
+  }
+  
 }
