@@ -72,6 +72,25 @@ export class FeedPage {
     for (let i = 1; i <= 50; i++) {
       this.items.push({ "number": i });
     }
+    this.userId = this.get('meuid');
+    this.userImagem = this.get('imagem');
+    this.userName = this.get('nome');
+  }
+
+  public update(key: string, data: string) {
+    return this.save(key, data);
+  }
+ 
+  private save(key: string, data: string) {
+    return this.storage.set(key, data);
+  }
+ 
+  public remove(key: string) {
+    return this.storage.remove(key);
+  }
+  
+  public get(key: string) {
+    return this.storage.get(key);
   }
 
   getQtdNotificacoes() {
@@ -775,9 +794,6 @@ export class FeedPage {
   }
 
   setStorage() {
-    this.storage.set('nome', this.userName);
-    this.storage.set('imagem', this.userImagem);
-    this.storage.set('meuid', this.userId);
     this.getUserPosition();
   }
 
